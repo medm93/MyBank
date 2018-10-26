@@ -51,7 +51,7 @@
             </VBox>
          </children>
       </VBox>
-      <Button id="button-login" fx:id="signInButon" mnemonicParsing="false" onAction="#signIn" prefWidth="150.0" text="Zaloguj się">
+      <Button id="button-login" fx:id="signInButton" mnemonicParsing="false" onAction="#signIn" prefWidth="150.0" text="Zaloguj się">
          <padding>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </padding></Button>

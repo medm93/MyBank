@@ -14,7 +14,11 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import static controllers.UserPanelController.USER_PANEL_CONTROLLER;
+
 public class LoginController implements Initializable {
+
+    public static LoginController LOGIN_CONTROLLER;
 
     @FXML
     private TextField loginTextField;
@@ -23,18 +27,20 @@ public class LoginController implements Initializable {
     private PasswordField passwordTextField;
 
     @FXML
-    private Button signInButon;
+    private Button signInButton;
+
 
     private CustomerList customerList;
     private MainController mainController;
 
     public void initialize(URL location, ResourceBundle resources) {
-        customerList = new CustomerList();
+        LOGIN_CONTROLLER = this;
+        System.out.println(customerList);
     }
 
     @FXML
     void signIn(ActionEvent event) throws IOException {
-        Window owner = signInButon.getScene().getWindow();
+        Window owner = signInButton.getScene().getWindow();
         if (loginTextField.getText().isEmpty() || passwordTextField.getText().isEmpty()) {
             Dialogs.loginAlert(owner, "Błąd formularza!", "Wszystkie pola muszą być uzupełnione.");
             return;
@@ -42,13 +48,24 @@ public class LoginController implements Initializable {
 
         if (customerList.getCustomerList().containsKey(loginTextField.getText())) {
             if (customerList.getCustomerList().get(loginTextField.getText()).getPassword().equals(passwordTextField.getText())) {
-                mainController.setCenter("/fxml/Test.fxml");
+                mainController.setStatus(loginTextField.getText());
+                mainController.setCenter("/fxml/UserPanelView.fxml");
+                USER_PANEL_CONTROLLER.setMainController(mainController);
+                USER_PANEL_CONTROLLER.logIn();
             } else {
                 Dialogs.loginAlert(owner, "Błąd formularza!", "Zły login lub hasło");
             }
         } else {
             Dialogs.loginAlert(owner, "Błąd formularza!", "Zły login lub hasło");
         }
+    }
+
+    public CustomerList getCustomerList() {
+        return customerList;
+    }
+
+    public void setCustomerList(CustomerList customerList) {
+        this.customerList = customerList;
     }
 
     public MainController getMainController() {
