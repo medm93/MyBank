@@ -1,5 +1,1 @@
-target/classes/*
-target/classes/fxml/Main.fxml
-target/classes/app/Main.class
-target/classes/controllers/MainController.class
-target/classes/fxml/Main.fxml
+target/*

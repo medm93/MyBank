@@ -42,7 +42,7 @@ public class LoginController implements Initializable {
     void signIn(ActionEvent event) throws IOException {
         Window owner = signInButton.getScene().getWindow();
         if (loginTextField.getText().isEmpty() || passwordTextField.getText().isEmpty()) {
-            Dialogs.loginAlert(owner, "Błąd formularza!", "Wszystkie pola muszą być uzupełnione.");
+            Dialogs.errorAlert(/*owner,*/ "Błąd formularza!", "Wszystkie pola muszą być uzupełnione.");
             return;
         }
 
@@ -53,10 +53,10 @@ public class LoginController implements Initializable {
                 USER_PANEL_CONTROLLER.setMainController(mainController);
                 USER_PANEL_CONTROLLER.logIn();
             } else {
-                Dialogs.loginAlert(owner, "Błąd formularza!", "Zły login lub hasło");
+                Dialogs.errorAlert(/*owner,*/ "Błąd formularza!", "Zły login lub hasło");
             }
         } else {
-            Dialogs.loginAlert(owner, "Błąd formularza!", "Zły login lub hasło");
+            Dialogs.errorAlert(/*owner,*/ "Błąd formularza!", "Zły login lub hasło");
         }
     }
 

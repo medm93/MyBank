@@ -2,10 +2,14 @@ package controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.Pane;
 
 import java.io.IOException;
 import java.net.URL;
@@ -31,29 +35,52 @@ public class UserPanelController implements Initializable {
     private Label accountBalance;
 
     @FXML
+    private ToggleButton paymentButton;
+
+    @FXML
     private ToggleGroup toggleGroup;
+
+    @FXML
+    private ToggleButton withdrawalButton;
+
+    @FXML
+    private Pane pane;
 
     private MainController mainController;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         USER_PANEL_CONTROLLER = this;
+
     }
 
     public void logIn() {
-        login.setText(mainController.getStatus());
-        String firstName = mainController.getCustomerList().getCustomerList().get(login.getText()).getFirstName();
-        String lastName = mainController.getCustomerList().getCustomerList().get(login.getText()).getLastName();
+        login.setText(MAIN_CONTROLLER.getStatus());
+        String firstName = MAIN_CONTROLLER.getCustomerList().getCustomerList().get(login.getText()).getFirstName();
+        String lastName = MAIN_CONTROLLER.getCustomerList().getCustomerList().get(login.getText()).getLastName();
         name.setText(firstName + " " + lastName);
-        accountBalance.setText(mainController.getCustomerList().getCustomerList().get(login.getText()).getAccountBalance() + " PLN");
+        accountBalance.setText(MAIN_CONTROLLER.getCustomerList().getCustomerList().get(login.getText()).getAccountBalance() + " PLN");
     }
 
     @FXML
     void logOut(ActionEvent event) throws IOException {
-        MAIN_CONTROLLER.setCenter("/fxml/LoginView.fxml");
+        MAIN_CONTROLLER.setCenter("/fxml/LoginPanelView.fxml");
         LOGIN_CONTROLLER.setCustomerList(MAIN_CONTROLLER.getCustomerList());
         LOGIN_CONTROLLER.setMainController(MAIN_CONTROLLER);
 
+    }
+
+    @FXML
+    void paymentOnAction(ActionEvent event) throws IOException {
+        if(paymentButton.isSelected()) {
+            setPane("/fxml/PaymentPanelView.fxml");
+        }
+    }
+
+    public void setPane(String fxmlPath) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource(fxmlPath));
+        Parent parent = fxmlLoader.load();
+        pane.getChildren().add(parent);
     }
 
     public Label getName() {

@@ -1,11 +1,14 @@
 package models;
 
+import java.math.BigDecimal;
+
 public class Customer {
     private String firstName;
     private String lastName;
     private String login;
     private String password;
-    private double accountBalance;
+    private String accountBalance;
+    //private double accountBalance;
 
     public String getFirstName() {
         return firstName;
@@ -39,20 +42,27 @@ public class Customer {
         this.password = password;
     }
 
-    public double getAccountBalance() {
+    public String getAccountBalance() {
         return accountBalance;
     }
 
-    public void setAccountBalance(double accountBalance) {
+    public void setAccountBalance(String accountBalance) {
         this.accountBalance = accountBalance;
     }
 
-    public Customer(String firstName, String lastName, String login, String password, double accountBalance) {
+    public Customer(String firstName, String lastName, String login, String password, String accountBalance) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.login = login;
         this.password = password;
         this.accountBalance = accountBalance;
+    }
+
+    public void doPayment(String value) throws NumberFormatException {
+        BigDecimal currentAccountBalance = new BigDecimal(accountBalance);
+        BigDecimal payment = new BigDecimal(value);
+        BigDecimal newAccountBalance = currentAccountBalance.add(payment);
+        accountBalance = newAccountBalance.toString();
     }
 
     @Override

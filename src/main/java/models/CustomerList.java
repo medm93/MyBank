@@ -1,5 +1,6 @@
 package models;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -32,7 +33,7 @@ public class CustomerList {
         customerList = new TreeMap<String, Customer>();
         customerList.put(
                 "123456",
-                new Customer("Mateusz", "Misiak", "123456", "tajne", 0)
+                new Customer("Mateusz", "Misiak", "123456", "tajne", "1000.25")
         );
 
     }
