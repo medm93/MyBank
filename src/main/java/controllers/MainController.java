@@ -19,19 +19,19 @@ public class MainController implements Initializable {
     private BorderPane borderPane;
 
     @FXML
-    private LoginController loginController;
+    private LoginPanelController loginPanelController;
 
     @FXML
     private UserPanelController userPanelController;
 
     private CustomerList customerList;
-    private String status;
+    private String session;
 
     public void initialize(URL location, ResourceBundle resources) {
         MAIN_CONTROLLER = this;
         customerList = new CustomerList();
-        loginController.setMainController(this);
-        loginController.setCustomerList(customerList);
+        loginPanelController.setMainController(this);
+        loginPanelController.setCustomerList(customerList);
 
     }
 
@@ -39,7 +39,6 @@ public class MainController implements Initializable {
         FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource(fxmlPath));
         Parent parent = fxmlLoader.load();
         borderPane.setCenter(parent);
-        System.out.println(fxmlLoader.getController());
     }
 
     public FXMLLoader getFXMLLoader(String fxmlPath) {
@@ -62,20 +61,20 @@ public class MainController implements Initializable {
         this.customerList = customerList;
     }
 
-    public String getStatus() {
-        return status;
+    public String getSession() {
+        return session;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setSession(String session) {
+        this.session = session;
     }
 
-    public LoginController getLoginController() {
-        return loginController;
+    public LoginPanelController getLoginPanelController() {
+        return loginPanelController;
     }
 
-    public void setLoginController(LoginController loginController) {
-        this.loginController = loginController;
+    public void setLoginPanelController(LoginPanelController loginPanelController) {
+        this.loginPanelController = loginPanelController;
     }
 
     public UserPanelController getUserPanelController() {

@@ -9,13 +9,15 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+import models.Customer;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Map;
 import java.util.ResourceBundle;
 
-import static controllers.LoginController.LOGIN_CONTROLLER;
+import static controllers.LoginPanelController.LOGIN_CONTROLLER;
 import static controllers.MainController.MAIN_CONTROLLER;
 
 public class UserPanelController implements Initializable {
@@ -44,43 +46,69 @@ public class UserPanelController implements Initializable {
     private ToggleButton withdrawalButton;
 
     @FXML
-    private Pane pane;
+    private ToggleButton historyButton;
 
-    private MainController mainController;
+    @FXML
+    private VBox vBox;
+
+    private Map<String, Customer> customerList;
+    private String session;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         USER_PANEL_CONTROLLER = this;
-
+        customerList = MAIN_CONTROLLER.getCustomerList().getCustomerList();
+        session = MAIN_CONTROLLER.getSession();
     }
 
     public void logIn() {
-        login.setText(MAIN_CONTROLLER.getStatus());
-        String firstName = MAIN_CONTROLLER.getCustomerList().getCustomerList().get(login.getText()).getFirstName();
-        String lastName = MAIN_CONTROLLER.getCustomerList().getCustomerList().get(login.getText()).getLastName();
+        login.setText(session);
+        String firstName = customerList.get(session).getFirstName();
+        String lastName = customerList.get(session).getLastName();
         name.setText(firstName + " " + lastName);
-        accountBalance.setText(MAIN_CONTROLLER.getCustomerList().getCustomerList().get(login.getText()).getAccountBalance() + " PLN");
+        accountBalance.setText(customerList.get(session).getAccountBalance() + " PLN");
     }
 
     @FXML
     void logOut(ActionEvent event) throws IOException {
         MAIN_CONTROLLER.setCenter("/fxml/LoginPanelView.fxml");
         LOGIN_CONTROLLER.setCustomerList(MAIN_CONTROLLER.getCustomerList());
-        LOGIN_CONTROLLER.setMainController(MAIN_CONTROLLER);
-
     }
 
     @FXML
     void paymentOnAction(ActionEvent event) throws IOException {
+        clearVBox();
         if(paymentButton.isSelected()) {
-            setPane("/fxml/PaymentPanelView.fxml");
+            setVBox("/fxml/PaymentPanelView.fxml");
         }
     }
 
-    public void setPane(String fxmlPath) throws IOException {
+    @FXML
+    void withdrawalOnAction(ActionEvent event) throws IOException {
+        clearVBox();
+        if(withdrawalButton.isSelected()) {
+            clearVBox();
+            setVBox("/fxml/WithdrawalPanelView.fxml");
+        }
+    }
+
+    @FXML
+    void historyOnAction(ActionEvent event) throws IOException {
+        clearVBox();
+        if(historyButton.isSelected()) {
+            clearVBox();
+            setVBox("/fxml/HistoryPanelView1.fxml");
+        }
+    }
+
+    public void setVBox(String fxmlPath) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource(fxmlPath));
         Parent parent = fxmlLoader.load();
-        pane.getChildren().add(parent);
+        vBox.getChildren().add(parent);
+    }
+
+    private void clearVBox() {
+        vBox.getChildren().clear();
     }
 
     public Label getName() {
@@ -115,6 +143,14 @@ public class UserPanelController implements Initializable {
         this.accountBalance = accountBalance;
     }
 
+    public ToggleButton getPaymentButton() {
+        return paymentButton;
+    }
+
+    public void setPaymentButton(ToggleButton paymentButton) {
+        this.paymentButton = paymentButton;
+    }
+
     public ToggleGroup getToggleGroup() {
         return toggleGroup;
     }
@@ -123,13 +159,43 @@ public class UserPanelController implements Initializable {
         this.toggleGroup = toggleGroup;
     }
 
-    public MainController getMainController() {
-        return mainController;
+    public ToggleButton getWithdrawalButton() {
+        return withdrawalButton;
     }
 
-    public void setMainController(MainController mainController) {
-        this.mainController = mainController;
+    public void setWithdrawalButton(ToggleButton withdrawalButton) {
+        this.withdrawalButton = withdrawalButton;
     }
 
+    public ToggleButton getHistoryButton() {
+        return historyButton;
+    }
 
+    public void setHistoryButton(ToggleButton historyButton) {
+        this.historyButton = historyButton;
+    }
+
+    public VBox getvBox() {
+        return vBox;
+    }
+
+    public void setvBox(VBox vBox) {
+        this.vBox = vBox;
+    }
+
+    public Map<String, Customer> getCustomerList() {
+        return customerList;
+    }
+
+    public void setCustomerList(Map<String, Customer> customerList) {
+        this.customerList = customerList;
+    }
+
+    public String getSession() {
+        return session;
+    }
+
+    public void setSession(String session) {
+        this.session = session;
+    }
 }

@@ -6,7 +6,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.stage.Window;
 import models.CustomerList;
 import utils.Dialogs;
 
@@ -14,11 +13,12 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import static controllers.MainController.MAIN_CONTROLLER;
 import static controllers.UserPanelController.USER_PANEL_CONTROLLER;
 
-public class LoginController implements Initializable {
+public class LoginPanelController implements Initializable {
 
-    public static LoginController LOGIN_CONTROLLER;
+    public static LoginPanelController LOGIN_CONTROLLER;
 
     @FXML
     private TextField loginTextField;
@@ -35,28 +35,26 @@ public class LoginController implements Initializable {
 
     public void initialize(URL location, ResourceBundle resources) {
         LOGIN_CONTROLLER = this;
-        System.out.println(customerList);
     }
 
     @FXML
     void signIn(ActionEvent event) throws IOException {
-        Window owner = signInButton.getScene().getWindow();
         if (loginTextField.getText().isEmpty() || passwordTextField.getText().isEmpty()) {
-            Dialogs.errorAlert(/*owner,*/ "Błąd formularza!", "Wszystkie pola muszą być uzupełnione.");
+            Dialogs.errorAlert( "Błąd formularza!", "Wszystkie pola muszą być uzupełnione.");
             return;
         }
 
         if (customerList.getCustomerList().containsKey(loginTextField.getText())) {
             if (customerList.getCustomerList().get(loginTextField.getText()).getPassword().equals(passwordTextField.getText())) {
-                mainController.setStatus(loginTextField.getText());
-                mainController.setCenter("/fxml/UserPanelView.fxml");
-                USER_PANEL_CONTROLLER.setMainController(mainController);
+                MAIN_CONTROLLER.setSession(loginTextField.getText());
+                MAIN_CONTROLLER.setCenter("/fxml/UserPanelView.fxml");
+//                USER_PANEL_CONTROLLER.setMainController(mainController);
                 USER_PANEL_CONTROLLER.logIn();
             } else {
-                Dialogs.errorAlert(/*owner,*/ "Błąd formularza!", "Zły login lub hasło");
+                Dialogs.errorAlert( "Błąd formularza!", "Zły login lub hasło");
             }
         } else {
-            Dialogs.errorAlert(/*owner,*/ "Błąd formularza!", "Zły login lub hasło");
+            Dialogs.errorAlert("Błąd formularza!", "Zły login lub hasło");
         }
     }
 

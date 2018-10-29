@@ -1,6 +1,7 @@
 package models;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class Customer {
     private String firstName;
@@ -8,7 +9,7 @@ public class Customer {
     private String login;
     private String password;
     private String accountBalance;
-    //private double accountBalance;
+    private AccountHistory accountHistory;
 
     public String getFirstName() {
         return firstName;
@@ -50,29 +51,40 @@ public class Customer {
         this.accountBalance = accountBalance;
     }
 
+    public AccountHistory getAccountHistory() {
+        return accountHistory;
+    }
+
+    public void setAccountHistory(AccountHistory accountHistory) {
+        this.accountHistory = accountHistory;
+    }
+
     public Customer(String firstName, String lastName, String login, String password, String accountBalance) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.login = login;
         this.password = password;
         this.accountBalance = accountBalance;
+        this.accountHistory = new AccountHistory();
     }
 
-    public void doPayment(String value) throws NumberFormatException {
-        BigDecimal currentAccountBalance = new BigDecimal(accountBalance);
-        BigDecimal payment = new BigDecimal(value);
-        BigDecimal newAccountBalance = currentAccountBalance.add(payment);
+    public void doPayment(String title, String value) throws NumberFormatException {
+        BigDecimal currentAccountBalance = new BigDecimal(accountBalance).setScale(2, RoundingMode.HALF_EVEN);
+        BigDecimal payment = new BigDecimal(value).setScale(2, RoundingMode.HALF_EVEN);
+        BigDecimal newAccountBalance = currentAccountBalance.add(payment).setScale(2, RoundingMode.HALF_EVEN);
         accountBalance = newAccountBalance.toString();
+        AccountRecord accountRecord = new AccountRecord();
+        accountHistory.addAccountRecord(accountRecord);
+        accountRecord.addEntry(title, value);
     }
 
-    @Override
-    public String toString() {
-        return "Customer{" +
-                "firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", login=" + login +
-                ", password='" + password + '\'' +
-                ", accountBalance=" + accountBalance +
-                '}';
+    public void doWithdrawal(String title, String value) throws NumberFormatException {
+        BigDecimal currentAccountBalance = new BigDecimal(accountBalance).setScale(2, RoundingMode.HALF_EVEN);
+        BigDecimal payment = new BigDecimal(value).setScale(2, RoundingMode.HALF_EVEN);
+        BigDecimal newAccountBalance = currentAccountBalance.subtract(payment).setScale(2, RoundingMode.HALF_EVEN);
+        accountBalance = newAccountBalance.toString();
+        AccountRecord accountRecord = new AccountRecord();
+        accountHistory.addAccountRecord(accountRecord);
+        accountRecord.addEntry(title, "-" + value);
     }
 }
