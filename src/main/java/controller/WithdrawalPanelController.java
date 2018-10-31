@@ -1,11 +1,11 @@
-package controllers;
+package controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import models.Customer;
+import model.Customer;
 import utils.Dialogs;
 
 import java.io.IOException;
@@ -13,8 +13,8 @@ import java.net.URL;
 import java.util.Map;
 import java.util.ResourceBundle;
 
-import static controllers.MainController.MAIN_CONTROLLER;
-import static controllers.UserPanelController.USER_PANEL_CONTROLLER;
+import static controller.MainController.MAIN_CONTROLLER;
+import static controller.UserPanelController.USER_PANEL_CONTROLLER;
 
 public class WithdrawalPanelController implements Initializable {
 

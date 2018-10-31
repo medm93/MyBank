@@ -9,12 +9,12 @@
 <?import javafx.scene.layout.VBox?>
 
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="400.0" spacing="10.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.WithdrawalPanelController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="400.0" spacing="10.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.WithdrawalPanelController">
    <children>
       <VBox spacing="5.0">
          <children>
             <Label text="TYTUŁ" />
-            <TextField fx:id="title" promptText="Tytuł wpłaty" />
+            <TextField fx:id="title" promptText="Tytuł" />
          </children>
       </VBox>
       <VBox spacing="5.0">

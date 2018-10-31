@@ -1,11 +1,11 @@
-package controllers;
+package controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import models.Customer;
+import model.Customer;
 import utils.Dialogs;
 
 import java.io.IOException;
@@ -13,10 +13,12 @@ import java.net.URL;
 import java.util.Map;
 import java.util.ResourceBundle;
 
-import static controllers.MainController.MAIN_CONTROLLER;
-import static controllers.UserPanelController.USER_PANEL_CONTROLLER;
+import static controller.MainController.MAIN_CONTROLLER;
+import static controller.UserPanelController.USER_PANEL_CONTROLLER;
 
 public class PaymentPanelController implements Initializable {
+
+    private final static String USER_PANEL_VIEW = "/fxml/UserPanelView.fxml";
 
     @FXML
     private TextField title;
@@ -47,7 +49,7 @@ public class PaymentPanelController implements Initializable {
         } catch (NumberFormatException exception) {
             Dialogs.errorAlert("Błąd!", "Kwota została odzielona: \",\" zamiast \".\".");
         } finally {
-            MAIN_CONTROLLER.setCenter("/fxml/UserPanelView.fxml");
+            MAIN_CONTROLLER.setCenter(USER_PANEL_VIEW);
             USER_PANEL_CONTROLLER.logIn();
         }
 

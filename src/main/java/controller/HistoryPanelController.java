@@ -1,18 +1,18 @@
-package controllers;
+package controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import models.AccountRecord;
-import models.Customer;
+import model.AccountRecord;
+import model.Customer;
 
 import java.net.URL;
 import java.util.Map;
 import java.util.ResourceBundle;
 
-import static controllers.MainController.MAIN_CONTROLLER;
+import static controller.MainController.MAIN_CONTROLLER;
 
 public class HistoryPanelController implements Initializable {
     @FXML

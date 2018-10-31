@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="TOP_CENTER" spacing="10.0" stylesheets="@../css/UserPanelStyle.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.UserPanelController">
+<VBox alignment="TOP_CENTER" spacing="10.0" stylesheets="@../css/UserPanelStyle.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.UserPanelController">
    <children>
       <AnchorPane maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0">
          <children>
@@ -58,7 +58,7 @@
             <ToggleButton fx:id="historyButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#historyOnAction" prefHeight="50.0" prefWidth="150.0" text="Historia" toggleGroup="$toggleGroup" />
          </children>
       </HBox>
-      <VBox fx:id="vBox" alignment="TOP_CENTER" />
+      <VBox fx:id="vBox" alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
    </children>
    <padding>
       <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />

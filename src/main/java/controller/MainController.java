@@ -1,11 +1,11 @@
-package controllers;
+package controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.layout.BorderPane;
-import models.CustomerList;
+import model.CustomerList;
 
 import java.io.IOException;
 import java.net.URL;
@@ -14,6 +14,7 @@ import java.util.ResourceBundle;
 public class MainController implements Initializable {
 
     public static MainController MAIN_CONTROLLER;
+    private static final String WELCOME_PANEL_VIEW_FXML = "/fxml/WelcomePanelView.fxml";
 
     @FXML
     private BorderPane borderPane;
@@ -29,9 +30,14 @@ public class MainController implements Initializable {
 
     public void initialize(URL location, ResourceBundle resources) {
         MAIN_CONTROLLER = this;
-        customerList = new CustomerList();
-        loginPanelController.setMainController(this);
-        loginPanelController.setCustomerList(customerList);
+        try {
+            setCenter(WELCOME_PANEL_VIEW_FXML);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+//        customerList = new CustomerList();
+//        loginPanelController.setMainController(this);
+//        loginPanelController.setCustomerList(customerList);
 
     }
 

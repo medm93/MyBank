@@ -1,4 +1,4 @@
-package controllers;
+package controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -6,15 +6,15 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import models.CustomerList;
+import model.CustomerList;
 import utils.Dialogs;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import static controllers.MainController.MAIN_CONTROLLER;
-import static controllers.UserPanelController.USER_PANEL_CONTROLLER;
+import static controller.MainController.MAIN_CONTROLLER;
+import static controller.UserPanelController.USER_PANEL_CONTROLLER;
 
 public class LoginPanelController implements Initializable {
 
@@ -48,7 +48,6 @@ public class LoginPanelController implements Initializable {
             if (customerList.getCustomerList().get(loginTextField.getText()).getPassword().equals(passwordTextField.getText())) {
                 MAIN_CONTROLLER.setSession(loginTextField.getText());
                 MAIN_CONTROLLER.setCenter("/fxml/UserPanelView.fxml");
-//                USER_PANEL_CONTROLLER.setMainController(mainController);
                 USER_PANEL_CONTROLLER.logIn();
             } else {
                 Dialogs.errorAlert( "Błąd formularza!", "Zły login lub hasło");

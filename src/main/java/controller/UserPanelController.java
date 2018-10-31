@@ -1,4 +1,4 @@
-package controllers;
+package controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,19 +10,23 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.VBox;
-import models.Customer;
+import model.Customer;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.Map;
 import java.util.ResourceBundle;
 
-import static controllers.LoginPanelController.LOGIN_CONTROLLER;
-import static controllers.MainController.MAIN_CONTROLLER;
+import static controller.LoginPanelController.LOGIN_CONTROLLER;
+import static controller.MainController.MAIN_CONTROLLER;
 
 public class UserPanelController implements Initializable {
 
     public static UserPanelController USER_PANEL_CONTROLLER;
+    private final static String LOGIN_PANEL_VIEW = "/fxml/LoginPanelView.fxml";
+    private final static String PAYMENT_PANEL_VIEW = "/fxml/PaymentPanelView.fxml";
+    private final static String WITHDRAWAL_PANEL_VIEW = "/fxml/WithdrawalPanelView.fxml";
+    private final static String HISTORY_PANEL_VIEW = "/fxml/HistoryPanelView.fxml";
 
     @FXML
     private Label name;
@@ -71,7 +75,7 @@ public class UserPanelController implements Initializable {
 
     @FXML
     void logOut(ActionEvent event) throws IOException {
-        MAIN_CONTROLLER.setCenter("/fxml/LoginPanelView.fxml");
+        MAIN_CONTROLLER.setCenter(LOGIN_PANEL_VIEW);
         LOGIN_CONTROLLER.setCustomerList(MAIN_CONTROLLER.getCustomerList());
     }
 
@@ -79,7 +83,7 @@ public class UserPanelController implements Initializable {
     void paymentOnAction(ActionEvent event) throws IOException {
         clearVBox();
         if(paymentButton.isSelected()) {
-            setVBox("/fxml/PaymentPanelView.fxml");
+            setVBox(PAYMENT_PANEL_VIEW);
         }
     }
 
@@ -88,7 +92,7 @@ public class UserPanelController implements Initializable {
         clearVBox();
         if(withdrawalButton.isSelected()) {
             clearVBox();
-            setVBox("/fxml/WithdrawalPanelView.fxml");
+            setVBox(WITHDRAWAL_PANEL_VIEW);
         }
     }
 
@@ -97,7 +101,7 @@ public class UserPanelController implements Initializable {
         clearVBox();
         if(historyButton.isSelected()) {
             clearVBox();
-            setVBox("/fxml/HistoryPanelView1.fxml");
+            setVBox(HISTORY_PANEL_VIEW);
         }
     }
 

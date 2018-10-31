@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox id="background" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="400.0" spacing="25.0" stylesheets="@../css/RegistrationPanelStyle.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.RegistrationPanelController">
+    <children>
+      <HBox>
+         <children>
+            <Button id="back-button" mnemonicParsing="false" onAction="#back" prefHeight="25.0" prefWidth="50.0">
+               <graphic>
+                  <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/arrow_back.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+      </HBox>
+        <Label id="logo-label" alignment="CENTER" contentDisplay="TOP" graphicTextGap="0.0" text="MyBank">
+            <graphic>
+                <ImageView fitHeight="150.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../images/money-box.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+            <font>
+                <Font size="20.0" />
+            </font>
+        </Label>
+      <VBox alignment="CENTER" spacing="10.0">
+         <children>
+              <Label id="title-label" text="REJESTRACJA" />
+            <Label id="information-label" text="Wprowadź dane dla nowego konta bankowego" />
+         </children>
+      </VBox>
+        <VBox spacing="5.0">
+            <children>
+                <Label id="form-title-label" text="IMIĘ" />
+                <TextField fx:id="firstNameField" />
+                <Label id="form-title-label" text="NAZWISKO" />
+                <TextField fx:id="lastNameField" />
+                <Label id="form-title-label" text="E-MAIL" />
+                <TextField fx:id="emailField" />
+                <Label id="form-title-label" text="HASŁO" />
+                <PasswordField fx:id="passwordField" />
+                <Label id="form-title-label" text="POWTÓRZ HASŁO" />
+                <PasswordField fx:id="confirmPasswordField" />
+            </children>
+            <VBox.margin>
+                <Insets />
+            </VBox.margin>
+        </VBox>
+        <HBox alignment="CENTER_RIGHT">
+            <children>
+                <Button id="registration-button" fx:id="registrationButton" mnemonicParsing="false" onAction="#registration" text="REJESTRUJ" />
+            </children>
+        </HBox>
+    </children>
+    <padding>
+        <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+    </padding>
+</VBox>
