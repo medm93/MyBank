@@ -45,3 +45,7 @@
     -fx-font-weight: bold;
     -fx-font-style: normal;
 }
+
+#error-text-field {
+    -fx-base: #f44336;
+}

@@ -1,15 +1,45 @@
 package model;
 
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-public class Customer {
+@DatabaseTable(tableName = "customers")
+public class Customer implements BaseModel{
+
+    @DatabaseField(columnName = "ID", generatedId = true)
+    private int id;
+
+    @DatabaseField(columnName = "FIRST_NAME", canBeNull = false)
     private String firstName;
+
+    @DatabaseField(columnName = "LAST_NAME", canBeNull = false)
     private String lastName;
+
+    @DatabaseField(columnName = "EMAIL", canBeNull = false, unique = true)
+    private String email;
+
+    @DatabaseField(columnName = "LOGIN", unique = true)
     private String login;
+
+    @DatabaseField(columnName = "PASSWORD", canBeNull = false)
     private String password;
+
+    @DatabaseField(columnName = "ACCOUNT_BALANCE", defaultValue = "0.00")
     private String accountBalance;
-    private AccountHistory accountHistory;
+
+    public Customer() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getFirstName() {
         return firstName;
@@ -25,6 +55,14 @@ public class Customer {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getLogin() {
@@ -51,12 +89,11 @@ public class Customer {
         this.accountBalance = accountBalance;
     }
 
-    public AccountHistory getAccountHistory() {
-        return accountHistory;
-    }
-
-    public void setAccountHistory(AccountHistory accountHistory) {
-        this.accountHistory = accountHistory;
+    public Customer(String firstName, String lastName, String email, String password) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
     }
 
     public Customer(String firstName, String lastName, String login, String password, String accountBalance) {
@@ -65,7 +102,7 @@ public class Customer {
         this.login = login;
         this.password = password;
         this.accountBalance = accountBalance;
-        this.accountHistory = new AccountHistory();
+        //this.accountHistory = new AccountHistory();
     }
 
     public void doPayment(String title, String value) throws NumberFormatException {
@@ -74,7 +111,7 @@ public class Customer {
         BigDecimal newAccountBalance = currentAccountBalance.add(payment).setScale(2, RoundingMode.HALF_EVEN);
         accountBalance = newAccountBalance.toString();
         AccountRecord accountRecord = new AccountRecord();
-        accountHistory.addAccountRecord(accountRecord);
+        //accountHistory.addAccountRecord(accountRecord);
         accountRecord.addEntry(title, value);
     }
 
@@ -84,7 +121,7 @@ public class Customer {
         BigDecimal newAccountBalance = currentAccountBalance.subtract(payment).setScale(2, RoundingMode.HALF_EVEN);
         accountBalance = newAccountBalance.toString();
         AccountRecord accountRecord = new AccountRecord();
-        accountHistory.addAccountRecord(accountRecord);
+        //accountHistory.addAccountRecord(accountRecord);
         accountRecord.addEntry(title, "-" + value);
     }
 }

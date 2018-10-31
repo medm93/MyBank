@@ -37,6 +37,6 @@ public class HistoryPanelController implements Initializable {
         accountHistoryTable.getColumns().add(timeColumn);
         accountHistoryTable.getColumns().add(titleColumn);
         accountHistoryTable.getColumns().add(amountOfMoneyColumn);
-        accountHistoryTable.setItems(customerList.get(session).getAccountHistory().getAccountRecords());
+        //accountHistoryTable.setItems(customerList.get(session).getAccountHistory().getAccountRecords());
     }
 }

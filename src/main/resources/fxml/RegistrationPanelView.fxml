@@ -47,15 +47,15 @@
         <VBox spacing="5.0">
             <children>
                 <Label id="form-title-label" text="IMIĘ" />
-                <TextField fx:id="firstNameField" />
+                <TextField fx:id="firstNameField" promptText="podaj imię" />
                 <Label id="form-title-label" text="NAZWISKO" />
-                <TextField fx:id="lastNameField" />
+                <TextField fx:id="lastNameField" promptText="podaj nazwisko" />
                 <Label id="form-title-label" text="E-MAIL" />
-                <TextField fx:id="emailField" />
+                <TextField fx:id="emailField" promptText="podaj e-mail" />
                 <Label id="form-title-label" text="HASŁO" />
-                <PasswordField fx:id="passwordField" />
+                <PasswordField fx:id="passwordField" promptText="podaj hasło" />
                 <Label id="form-title-label" text="POWTÓRZ HASŁO" />
-                <PasswordField fx:id="confirmPasswordField" />
+                <PasswordField fx:id="confirmPasswordField" promptText="powtórz hasło" />
             </children>
             <VBox.margin>
                 <Insets />
