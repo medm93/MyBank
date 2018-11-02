@@ -1,19 +1,22 @@
 package controller;
 
+import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.layout.BorderPane;
 import model.CustomerList;
+import utils.DBManager;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class MainController implements Initializable {
+public class MainPanelController implements Initializable {
 
-    public static MainController MAIN_CONTROLLER;
+    public static MainPanelController MAIN_CONTROLLER;
     private static final String WELCOME_PANEL_VIEW_FXML = "/fxml/WelcomePanelView.fxml";
 
     @FXML
@@ -23,7 +26,7 @@ public class MainController implements Initializable {
     private LoginPanelController loginPanelController;
 
     @FXML
-    private UserPanelController userPanelController;
+    private CustomerPanelController customerPanelController;
 
     private CustomerList customerList;
     private String session;
@@ -36,9 +39,16 @@ public class MainController implements Initializable {
             e.printStackTrace();
         }
 //        customerList = new CustomerList();
-//        loginPanelController.setMainController(this);
+//        loginPanelController.setMainPanelController(this);
 //        loginPanelController.setCustomerList(customerList);
 
+    }
+
+    @FXML
+    void exit(ActionEvent event) {
+        DBManager.closeConnectionSource();
+        Platform.exit();
+        System.exit(0);
     }
 
     public void setCenter(String fxmlPath) throws IOException {
@@ -83,11 +93,11 @@ public class MainController implements Initializable {
         this.loginPanelController = loginPanelController;
     }
 
-    public UserPanelController getUserPanelController() {
-        return userPanelController;
+    public CustomerPanelController getCustomerPanelController() {
+        return customerPanelController;
     }
 
-    public void setUserPanelController(UserPanelController userPanelController) {
-        this.userPanelController = userPanelController;
+    public void setCustomerPanelController(CustomerPanelController customerPanelController) {
+        this.customerPanelController = customerPanelController;
     }
 }

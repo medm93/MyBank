@@ -6,7 +6,7 @@ import javafx.scene.control.Button;
 
 import java.io.IOException;
 
-import static controller.MainController.MAIN_CONTROLLER;
+import static controller.MainPanelController.MAIN_CONTROLLER;
 
 public class WelcomePanelController {
 

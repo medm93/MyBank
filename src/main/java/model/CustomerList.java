@@ -18,7 +18,7 @@ public class CustomerList {
         customerList = new TreeMap<>();
         customerList.put(
                 "123456",
-                new Customer("Mateusz", "Misiak", "123456", "tajne", "0.00")
+                new Customer("Mateusz", "Misiak", "tajne", "0.00")
         );
 
     }

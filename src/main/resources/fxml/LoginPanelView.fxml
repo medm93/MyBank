@@ -7,56 +7,57 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox id="background" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="320.0" prefWidth="500.0" spacing="25.0" stylesheets="@../css/LoginViewStyle.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginPanelController">
+
+<VBox id="background" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="400.0" spacing="25.0" stylesheets="@../css/LoginPanelStyle.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginPanelController">
    <children>
-      <AnchorPane>
+      <HBox>
          <children>
-            <VBox AnchorPane.leftAnchor="0.0">
-               <children>
-                  <Label id="h1" text="Logowanie" />
-                  <Label id="p" text="Wprowadź swoje dane poniżej." />
-               </children>
-            </VBox>
-            <Label id="logo" alignment="CENTER" contentDisplay="TOP" graphicTextGap="0.0" text="MyBank" textAlignment="CENTER" AnchorPane.rightAnchor="0.0">
+            <Button id="back-button" mnemonicParsing="false" onAction="#back" prefHeight="25.0" prefWidth="50.0">
                <graphic>
-                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../images/money-box.png" />
+                        <Image url="@../images/arrow_back.png" />
                      </image>
                   </ImageView>
                </graphic>
-               <font>
-                  <Font name="System Bold Italic" size="12.0" />
-               </font>
-            </Label>
+            </Button>
          </children>
-      </AnchorPane>
-      <VBox spacing="10.0">
+      </HBox>
+      <Label id="logo-label" alignment="CENTER" contentDisplay="TOP" graphicTextGap="0.0" text="MyBank">
+         <graphic>
+            <ImageView fitHeight="150.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/money-box.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label id="title-label" alignment="CENTER" text="LOGOWANIE" />
+      <VBox spacing="5.0">
          <children>
-            <VBox>
-               <children>
-                  <Label id="h3" text="LOGIN" />
-                  <TextField fx:id="loginTextField" promptText="Podaj login" />
-               </children>
-            </VBox>
-            <VBox>
-               <children>
-                  <Label id="h3" text="HASŁO" />
-                  <PasswordField fx:id="passwordTextField" promptText="Podaj hasło" />
-               </children>
-            </VBox>
+            <Label id="form-title-label" text="E-MAIL lub LOGIN" />
+            <TextField fx:id="emailOrLoginField" />
+            <Label id="form-title-label" text="HASŁO" />
+            <PasswordField fx:id="passwordField" />
          </children>
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
       </VBox>
-      <Button id="button-login" fx:id="signInButton" mnemonicParsing="false" onAction="#signIn" prefWidth="150.0" text="Zaloguj się">
-         <padding>
-            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-         </padding></Button>
+      <HBox alignment="CENTER_RIGHT">
+         <children>
+            <Button id="login-button" mnemonicParsing="false" onAction="#login" text="ZALOGUJ" />
+         </children>
+      </HBox>
    </children>
    <padding>
-      <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
+      <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
    </padding>
 </VBox>

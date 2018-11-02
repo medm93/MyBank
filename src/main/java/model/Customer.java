@@ -2,28 +2,42 @@ package model;
 
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
+import org.apache.commons.codec.digest.DigestUtils;
 
+import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 @DatabaseTable(tableName = "customers")
 public class Customer implements BaseModel{
 
+    private static final String PASSWORD_PATTERN = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})";
+    private static final String FIRST_NAME_PATTERN = "^([a-zA-Z]{2,})";
+    private static final String LAST_NAME_PATTERN = "^([a-zA-z]{1,}'?-?[a-zA-Z]{2,}\\s?([a-zA-Z]{1,})?)";
+
     @DatabaseField(columnName = "ID", generatedId = true)
     private int id;
 
+    @NotEmpty
+    @Pattern(regexp = FIRST_NAME_PATTERN)
     @DatabaseField(columnName = "FIRST_NAME", canBeNull = false)
     private String firstName;
 
+    @NotEmpty
+    @Pattern(regexp = LAST_NAME_PATTERN)
     @DatabaseField(columnName = "LAST_NAME", canBeNull = false)
     private String lastName;
 
+    @NotEmpty
+    @Email
     @DatabaseField(columnName = "EMAIL", canBeNull = false, unique = true)
     private String email;
 
     @DatabaseField(columnName = "LOGIN", unique = true)
     private String login;
 
+    @NotEmpty
+    @Pattern(regexp = PASSWORD_PATTERN)
     @DatabaseField(columnName = "PASSWORD", canBeNull = false)
     private String password;
 
@@ -89,20 +103,16 @@ public class Customer implements BaseModel{
         this.accountBalance = accountBalance;
     }
 
-    public Customer(String firstName, String lastName, String email, String password) {
+    public Customer(@NotNull String firstName, @NotNull String lastName, @Email String email, @NotNull String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
     }
 
-    public Customer(String firstName, String lastName, String login, String password, String accountBalance) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.login = login;
-        this.password = password;
-        this.accountBalance = accountBalance;
-        //this.accountHistory = new AccountHistory();
+    public Customer encryptPassword() {
+        password = DigestUtils.sha512Hex(password);
+        return this;
     }
 
     public void doPayment(String title, String value) throws NumberFormatException {
@@ -123,5 +133,18 @@ public class Customer implements BaseModel{
         AccountRecord accountRecord = new AccountRecord();
         //accountHistory.addAccountRecord(accountRecord);
         accountRecord.addEntry(title, "-" + value);
+    }
+
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", login='" + login + '\'' +
+                ", password='" + password + '\'' +
+                ", accountBalance='" + accountBalance + '\'' +
+                '}';
     }
 }

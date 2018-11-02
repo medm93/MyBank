@@ -13,8 +13,8 @@ import java.net.URL;
 import java.util.Map;
 import java.util.ResourceBundle;
 
-import static controller.MainController.MAIN_CONTROLLER;
-import static controller.UserPanelController.USER_PANEL_CONTROLLER;
+import static controller.MainPanelController.MAIN_CONTROLLER;
+import static controller.CustomerPanelController.CUSTOMER_PANEL_CONTROLLER;
 
 public class WithdrawalPanelController implements Initializable {
 
@@ -47,8 +47,8 @@ public class WithdrawalPanelController implements Initializable {
         } catch (NumberFormatException exception) {
             Dialogs.errorAlert("Błąd!", "Kwota została odzielona: \",\" zamiast \".\".");
         } finally {
-            MAIN_CONTROLLER.setCenter("/fxml/UserPanelView.fxml");
-            USER_PANEL_CONTROLLER.logIn();
+            MAIN_CONTROLLER.setCenter("/fxml/CustomerPanelView.fxml");
+//            CUSTOMER_PANEL_CONTROLLER.logIn();
         }
     }
     @Override

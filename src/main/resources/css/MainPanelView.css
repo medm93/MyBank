@@ -1,0 +1,14 @@
+#background {
+    -fx-background-color: #FAFAFA;
+}
+
+#exit-button {
+    -fx-base: #f44336;
+}
+
+#copyright-label {
+    -fx-text-fill: #212121;
+    -fx-font-size: 10px;
+    -fx-font-weight: bold;
+    -fx-font-style: normal;
+}

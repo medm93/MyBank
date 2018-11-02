@@ -13,12 +13,12 @@ import java.net.URL;
 import java.util.Map;
 import java.util.ResourceBundle;
 
-import static controller.MainController.MAIN_CONTROLLER;
-import static controller.UserPanelController.USER_PANEL_CONTROLLER;
+import static controller.MainPanelController.MAIN_CONTROLLER;
+import static controller.CustomerPanelController.CUSTOMER_PANEL_CONTROLLER;
 
 public class PaymentPanelController implements Initializable {
 
-    private final static String USER_PANEL_VIEW = "/fxml/UserPanelView.fxml";
+    private final static String USER_PANEL_VIEW = "/fxml/CustomerPanelView.fxml";
 
     @FXML
     private TextField title;
@@ -50,7 +50,7 @@ public class PaymentPanelController implements Initializable {
             Dialogs.errorAlert("Błąd!", "Kwota została odzielona: \",\" zamiast \".\".");
         } finally {
             MAIN_CONTROLLER.setCenter(USER_PANEL_VIEW);
-            USER_PANEL_CONTROLLER.logIn();
+//            CUSTOMER_PANEL_CONTROLLER.logIn();
         }
 
     }

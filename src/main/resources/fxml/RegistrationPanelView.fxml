@@ -47,15 +47,40 @@
         <VBox spacing="5.0">
             <children>
                 <Label id="form-title-label" text="IMIĘ" />
-                <TextField fx:id="firstNameField" promptText="podaj imię" />
+            <VBox>
+               <children>
+                      <TextField fx:id="firstNameField" promptText="podaj imię" />
+                  <Label id="error-label" fx:id="firstNameError" maxWidth="1.7976931348623157E308" />
+               </children>
+            </VBox>
                 <Label id="form-title-label" text="NAZWISKO" />
-                <TextField fx:id="lastNameField" promptText="podaj nazwisko" />
+            <VBox>
+               <children>
+                      <TextField fx:id="lastNameField" promptText="podaj nazwisko" />
+                  <Label id="error-label" fx:id="lastNameError" maxWidth="1.7976931348623157E308" />
+               </children>
+            </VBox>
                 <Label id="form-title-label" text="E-MAIL" />
-                <TextField fx:id="emailField" promptText="podaj e-mail" />
+            <VBox>
+               <children>
+                      <TextField fx:id="emailField" promptText="podaj e-mail" />
+                  <Label id="error-label" fx:id="emailError" maxWidth="1.7976931348623157E308" />
+               </children>
+            </VBox>
                 <Label id="form-title-label" text="HASŁO" />
-                <PasswordField fx:id="passwordField" promptText="podaj hasło" />
+            <VBox>
+               <children>
+                      <PasswordField fx:id="passwordField" promptText="podaj hasło" />
+                  <Label id="error-label" fx:id="passwordError" maxWidth="1.7976931348623157E308" />
+               </children>
+            </VBox>
                 <Label id="form-title-label" text="POWTÓRZ HASŁO" />
-                <PasswordField fx:id="confirmPasswordField" promptText="powtórz hasło" />
+            <VBox>
+               <children>
+                      <PasswordField fx:id="confirmPasswordField" promptText="powtórz hasło" />
+                  <Label id="error-label" fx:id="confirmPasswordError" maxWidth="1.7976931348623157E308" />
+               </children>
+            </VBox>
             </children>
             <VBox.margin>
                 <Insets />

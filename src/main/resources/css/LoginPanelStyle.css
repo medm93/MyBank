@@ -24,13 +24,6 @@
     -fx-font-style: normal;
 }
 
-#information-label {
-    -fx-text-fill: #212121;
-    -fx-font-size: 10px;
-    -fx-font-weight: normal;
-    -fx-font-style: italic;
-}
-
 #form-title-label {
     -fx-text-fill: #212121;
     -fx-font-size: 12px;
@@ -38,21 +31,10 @@
     -fx-font-style: normal;
 }
 
-#registration-button {
-    -fx-base: #f44336;
+#login-button {
+    -fx-base: #8BC34A;
     -fx-text-fill: #FAFAFA;
     -fx-font-size: 14px;
-    -fx-font-weight: bold;
-    -fx-font-style: normal;
-}
-
-#error-text-field {
-    -fx-base: #f44336;
-}
-
-#error-label {
-    -fx-text-fill: #f44336;
-    -fx-font-size: 10px;
     -fx-font-weight: bold;
     -fx-font-style: normal;
 }

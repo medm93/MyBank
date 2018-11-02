@@ -12,7 +12,7 @@ import java.net.URL;
 import java.util.Map;
 import java.util.ResourceBundle;
 
-import static controller.MainController.MAIN_CONTROLLER;
+import static controller.MainPanelController.MAIN_CONTROLLER;
 
 public class HistoryPanelController implements Initializable {
     @FXML

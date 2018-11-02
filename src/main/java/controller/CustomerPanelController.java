@@ -18,11 +18,11 @@ import java.util.Map;
 import java.util.ResourceBundle;
 
 import static controller.LoginPanelController.LOGIN_CONTROLLER;
-import static controller.MainController.MAIN_CONTROLLER;
+import static controller.MainPanelController.MAIN_CONTROLLER;
 
-public class UserPanelController implements Initializable {
+public class CustomerPanelController implements Initializable {
 
-    public static UserPanelController USER_PANEL_CONTROLLER;
+    static CustomerPanelController CUSTOMER_PANEL_CONTROLLER;
     private final static String LOGIN_PANEL_VIEW = "/fxml/LoginPanelView.fxml";
     private final static String PAYMENT_PANEL_VIEW = "/fxml/PaymentPanelView.fxml";
     private final static String WITHDRAWAL_PANEL_VIEW = "/fxml/WithdrawalPanelView.fxml";
@@ -55,28 +55,23 @@ public class UserPanelController implements Initializable {
     @FXML
     private VBox vBox;
 
-    private Map<String, Customer> customerList;
-    private String session;
+    private Customer customer;
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        USER_PANEL_CONTROLLER = this;
-        customerList = MAIN_CONTROLLER.getCustomerList().getCustomerList();
-        session = MAIN_CONTROLLER.getSession();
+        CUSTOMER_PANEL_CONTROLLER = this;
     }
 
-    public void logIn() {
-        login.setText(session);
-        String firstName = customerList.get(session).getFirstName();
-        String lastName = customerList.get(session).getLastName();
-        name.setText(firstName + " " + lastName);
-        accountBalance.setText(customerList.get(session).getAccountBalance() + " PLN");
+    public void loadCustomerData() {
+        name.setText(customer.getFirstName() + " " + customer.getLastName());
+        login.setText(customer.getLogin());
+        accountBalance.setText(customer.getAccountBalance() + "PLN");
     }
 
     @FXML
     void logOut(ActionEvent event) throws IOException {
         MAIN_CONTROLLER.setCenter(LOGIN_PANEL_VIEW);
-        LOGIN_CONTROLLER.setCustomerList(MAIN_CONTROLLER.getCustomerList());
     }
 
     @FXML
@@ -187,19 +182,11 @@ public class UserPanelController implements Initializable {
         this.vBox = vBox;
     }
 
-    public Map<String, Customer> getCustomerList() {
-        return customerList;
+    public Customer getCustomer() {
+        return customer;
     }
 
-    public void setCustomerList(Map<String, Customer> customerList) {
-        this.customerList = customerList;
-    }
-
-    public String getSession() {
-        return session;
-    }
-
-    public void setSession(String session) {
-        this.session = session;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 }

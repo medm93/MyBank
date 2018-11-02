@@ -4,6 +4,7 @@ import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.logger.Logger;
 import com.j256.ormlite.logger.LoggerFactory;
+import com.j256.ormlite.stmt.QueryBuilder;
 import com.j256.ormlite.support.ConnectionSource;
 import model.BaseModel;
 
@@ -61,5 +62,10 @@ public abstract class CommonDao {
         } catch (SQLException e) {
             LOGGER.warn(e.getMessage());
         }
+    }
+
+    public <T extends BaseModel, I> QueryBuilder<T, I> getQueryBuilder(Class<T> tClass) {
+        Dao<T, I> dao = getDao(tClass);
+        return dao.queryBuilder();
     }
 }
