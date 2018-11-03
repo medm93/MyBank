@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox id="background" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="400.0" spacing="25.0" stylesheets="@../css/RegistrationPanelStyle.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.RegistrationPanelController">
+<VBox id="background" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="500.0" spacing="25.0" stylesheets="@../css/RegistrationPanelStyle.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.RegistrationPanelController">
     <children>
       <HBox>
          <children>
@@ -40,45 +40,45 @@
         </Label>
       <VBox alignment="CENTER" spacing="10.0">
          <children>
-              <Label id="title-label" text="REJESTRACJA" />
-            <Label id="information-label" text="Wprowadź dane dla nowego konta bankowego" />
+              <Label id="title-label" text="%fxml.registrationPanel.title" />
+            <Label id="information-label" text="%fxml.registrationPanel.description" />
          </children>
       </VBox>
         <VBox spacing="5.0">
             <children>
-                <Label id="form-title-label" text="IMIĘ" />
+                <Label id="form-title-label" text="%fxml.registrationPanel.firstName.title" />
             <VBox>
                <children>
-                      <TextField fx:id="firstNameField" promptText="podaj imię" />
-                  <Label id="error-label" fx:id="firstNameError" maxWidth="1.7976931348623157E308" />
+                      <TextField fx:id="firstNameField" promptText="%fxml.registrationPanel.firstName.promptText" />
+                  <Label id="error-label" fx:id="firstNameError" maxWidth="1.7976931348623157E308" wrapText="true" />
                </children>
             </VBox>
-                <Label id="form-title-label" text="NAZWISKO" />
+                <Label id="form-title-label" text="%fxml.registrationPanel.lastName.title" />
             <VBox>
                <children>
-                      <TextField fx:id="lastNameField" promptText="podaj nazwisko" />
-                  <Label id="error-label" fx:id="lastNameError" maxWidth="1.7976931348623157E308" />
+                      <TextField fx:id="lastNameField" promptText="%fxml.registrationPanel.lastName.promptText" />
+                  <Label id="error-label" fx:id="lastNameError" maxWidth="1.7976931348623157E308" wrapText="true" />
                </children>
             </VBox>
-                <Label id="form-title-label" text="E-MAIL" />
+                <Label id="form-title-label" text="%fxml.registrationPanel.email.title" />
             <VBox>
                <children>
-                      <TextField fx:id="emailField" promptText="podaj e-mail" />
-                  <Label id="error-label" fx:id="emailError" maxWidth="1.7976931348623157E308" />
+                      <TextField fx:id="emailField" promptText="%fxml.registrationPanel.email.promptText" />
+                  <Label id="error-label" fx:id="emailError" maxWidth="1.7976931348623157E308" wrapText="true" />
                </children>
             </VBox>
-                <Label id="form-title-label" text="HASŁO" />
+                <Label id="form-title-label" text="%fxml.registrationPanel.password.title" />
             <VBox>
                <children>
-                      <PasswordField fx:id="passwordField" promptText="podaj hasło" />
-                  <Label id="error-label" fx:id="passwordError" maxWidth="1.7976931348623157E308" />
+                      <PasswordField fx:id="passwordField" promptText="%fxml.registrationPanel.password.promptText" />
+                  <Label id="error-label" fx:id="passwordError" maxWidth="1.7976931348623157E308" wrapText="true" />
                </children>
             </VBox>
-                <Label id="form-title-label" text="POWTÓRZ HASŁO" />
+                <Label id="form-title-label" text="%fxml.registrationPanel.confirmPassword.title" />
             <VBox>
                <children>
-                      <PasswordField fx:id="confirmPasswordField" promptText="powtórz hasło" />
-                  <Label id="error-label" fx:id="confirmPasswordError" maxWidth="1.7976931348623157E308" />
+                      <PasswordField fx:id="confirmPasswordField" promptText="%fxml.registrationPanel.confirmPassword.promptText" />
+                  <Label id="error-label" fx:id="confirmPasswordError" maxWidth="1.7976931348623157E308" wrapText="true" />
                </children>
             </VBox>
             </children>
@@ -88,7 +88,7 @@
         </VBox>
         <HBox alignment="CENTER_RIGHT">
             <children>
-                <Button id="registration-button" fx:id="registrationButton" mnemonicParsing="false" onAction="#registration" text="REJESTRUJ" />
+                <Button id="registration-button" fx:id="registrationButton" mnemonicParsing="false" onAction="#registration" text="%fxml.registrationPanel.button" />
             </children>
         </HBox>
     </children>

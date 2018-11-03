@@ -5,11 +5,13 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox id="background" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="50.0" stylesheets="@../../../../../../../Java/Projects/SQLite/src/main/java/pl/medm/sqlite/myBank/WelcomePanelStyle.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.WelcomePanelController">
+<VBox id="background" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="500.0" spacing="25.0" stylesheets="@../css/WelcomePanelStyle.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.WelcomePanelController">
    <children>
+      <HBox maxHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" />
       <Label id="logo-label" alignment="CENTER" contentDisplay="TOP" graphicTextGap="0.0" text="MyBank">
          <graphic>
             <ImageView fitHeight="150.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
@@ -24,15 +26,15 @@
       </Label>
       <VBox alignment="CENTER" spacing="10.0">
          <children>
-            <Label id="title-label" alignment="CENTER" text="WITAMY" />
-            <Label id="information-label" text="Wybierz jedną z opcji" />
+            <Label id="title-label" alignment="CENTER" text="%fxml.welcomePanel.title" />
+            <Label id="information-label" text="%fxml.welcomePanel.description" />
          </children>
       </VBox>
       <VBox alignment="CENTER" spacing="25.0">
          <children>
-            <Button id="registration-button" fx:id="registrationButton" mnemonicParsing="false" onAction="#registration" prefHeight="50.0" prefWidth="200.0" text="REJESTRACJA" />
-            <Label text="lub" />
-            <Button id="login-button" fx:id="loginButton" mnemonicParsing="false" onAction="#login" prefHeight="50.0" prefWidth="200.0" text="LOGOWANIE" />
+            <Button id="registration-button" fx:id="registrationButton" mnemonicParsing="false" onAction="#registration" prefHeight="50.0" prefWidth="200.0" text="%fxml.welcomePanel.button.registration" />
+            <Label text="%fxml.welcomePanel.hyphen" />
+            <Button id="login-button" fx:id="loginButton" mnemonicParsing="false" onAction="#login" prefHeight="50.0" prefWidth="200.0" text="%fxml.welcomePanel.button.login" />
          </children>
       </VBox>
    </children>

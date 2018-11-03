@@ -5,12 +5,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.layout.BorderPane;
 import model.CustomerList;
 import utils.DBManager;
-
-import java.io.IOException;
+import utils.FXMLUtils;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -33,11 +31,7 @@ public class MainPanelController implements Initializable {
 
     public void initialize(URL location, ResourceBundle resources) {
         MAIN_CONTROLLER = this;
-        try {
-            setCenter(WELCOME_PANEL_VIEW_FXML);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        setCenter(WELCOME_PANEL_VIEW_FXML);
 //        customerList = new CustomerList();
 //        loginPanelController.setMainPanelController(this);
 //        loginPanelController.setCustomerList(customerList);
@@ -51,10 +45,11 @@ public class MainPanelController implements Initializable {
         System.exit(0);
     }
 
-    public void setCenter(String fxmlPath) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource(fxmlPath));
-        Parent parent = fxmlLoader.load();
-        borderPane.setCenter(parent);
+    public void setCenter(String fxmlPath) {
+//        FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource(fxmlPath));
+//        Parent parent = fxmlLoader.load();
+//        borderPane.setCenter(parent);
+        borderPane.setCenter(FXMLUtils.fxmlLoader(fxmlPath));
     }
 
     public FXMLLoader getFXMLLoader(String fxmlPath) {

@@ -1,16 +1,20 @@
 package app;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import utils.DBManager;
+import utils.FXMLUtils;
 
 public class Main extends Application {
+
+    private static final String MAIN_PANEL_VIEW_FXML = "/fxml/MainPanelView.fxml";
+
     public void start(Stage primaryStage) throws Exception {
-        Parent parent = (Parent) FXMLLoader.load(getClass().getResource("/fxml/MainPanelView.fxml"));
+//        Locale.setDefault(Locale.ENGLISH);
+        Parent parent = FXMLUtils.fxmlLoader(MAIN_PANEL_VIEW_FXML);
         Scene scene = new Scene(parent);
         primaryStage.setScene(scene);
         primaryStage.setTitle("MyBank");

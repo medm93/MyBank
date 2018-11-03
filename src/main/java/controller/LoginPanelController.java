@@ -11,7 +11,7 @@ import model.Customer;
 import model.CustomerList;
 import org.apache.commons.codec.digest.DigestUtils;
 import utils.DBManager;
-import utils.Dialogs;
+import utils.DialogsUtils;
 
 import java.io.IOException;
 import java.net.URL;
@@ -45,7 +45,7 @@ public class LoginPanelController implements Initializable {
     @FXML
     void signIn(ActionEvent event) throws IOException {
         if (loginTextField.getText().isEmpty() || passwordTextField.getText().isEmpty()) {
-            Dialogs.errorAlert( "Błąd formularza!", "Wszystkie pola muszą być uzupełnione.");
+            DialogsUtils.errorAlert( "Błąd formularza!", "Wszystkie pola muszą być uzupełnione.");
             return;
         }
 
@@ -55,10 +55,10 @@ public class LoginPanelController implements Initializable {
                 MAIN_CONTROLLER.setCenter("/fxml/CustomerPanelView.fxml");
 //                CUSTOMER_PANEL_CONTROLLER.logIn();
             } else {
-                Dialogs.errorAlert( "Błąd formularza!", "Zły login lub hasło");
+                DialogsUtils.errorAlert( "Błąd formularza!", "Zły login lub hasło");
             }
         } else {
-            Dialogs.errorAlert("Błąd formularza!", "Zły login lub hasło");
+            DialogsUtils.errorAlert("Błąd formularza!", "Zły login lub hasło");
         }
     }
 
@@ -90,11 +90,7 @@ public class LoginPanelController implements Initializable {
 
     @FXML
     void back(ActionEvent event) {
-        try {
-            MAIN_CONTROLLER.setCenter(WELCOME_PANEL_VIEW_FXML);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        MAIN_CONTROLLER.setCenter(WELCOME_PANEL_VIEW_FXML);
     }
 
     @FXML
@@ -114,8 +110,6 @@ public class LoginPanelController implements Initializable {
                 System.out.println("error");
             }
         } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
             e.printStackTrace();
         }
 //        try {

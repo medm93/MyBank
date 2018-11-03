@@ -7,6 +7,7 @@ import com.j256.ormlite.stmt.PreparedQuery;
 import com.j256.ormlite.stmt.QueryBuilder;
 import com.j256.ormlite.support.ConnectionSource;
 import model.Customer;
+import utils.exception.ApplicationException;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -42,12 +43,17 @@ public class CustomerDao extends CommonDao {
         return null;
     }
 
-    public boolean isMail(String email) throws SQLException {
+    public boolean queryForEmail(String email) throws ApplicationException {
         QueryBuilder<Customer, Integer> queryBuilder = getQueryBuilder(Customer.class);
-        queryBuilder.where().eq("EMAIL", email);
-        PreparedQuery<Customer> preparedQuery = queryBuilder.prepare();
-        Customer results = getDao(Customer.class).queryForFirst(preparedQuery);
-        return results != null;
+        try {
+            queryBuilder.where().eq("EMAIL", email);
+            PreparedQuery<Customer> preparedQuery = queryBuilder.prepare();
+            Customer results = getDao(Customer.class).queryForFirst(preparedQuery);
+            return results != null;
+        } catch (SQLException e) {
+            LOGGER.warn(e.getCause().getMessage());
+            throw new ApplicationException("Błąd");
+        }
     }
 
     public Customer findCustomer(String emailOrLogin, String password) throws SQLException {

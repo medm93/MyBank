@@ -11,8 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<VBox id="background" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="400.0" spacing="25.0" stylesheets="@../css/LoginPanelStyle.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginPanelController">
+<VBox id="background" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="500.0" spacing="25.0" stylesheets="@../css/LoginPanelStyle.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginPanelController">
    <children>
       <HBox>
          <children>
@@ -39,13 +38,18 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <Label id="title-label" alignment="CENTER" text="LOGOWANIE" />
+      <VBox alignment="CENTER" spacing="10.0">
+         <children>
+            <Label id="title-label" alignment="CENTER" text="%fxml.loginPanel.title" />
+            <Label id="description-label" text="%fxml.loginPanel.description" />
+         </children>
+      </VBox>
       <VBox spacing="5.0">
          <children>
-            <Label id="form-title-label" text="E-MAIL lub LOGIN" />
-            <TextField fx:id="emailOrLoginField" />
-            <Label id="form-title-label" text="HASŁO" />
-            <PasswordField fx:id="passwordField" />
+            <Label id="form-title-label" text="%fxml.loginPanel.emailOrLogin.title" />
+            <TextField fx:id="emailOrLoginField" promptText="%fxml.loginPanel.emailOrLogin.promptText" />
+            <Label id="form-title-label" text="%fxml.loginPanel.password.title" />
+            <PasswordField fx:id="passwordField" promptText="%fxml.loginPanel.password.promptText" />
          </children>
          <VBox.margin>
             <Insets />
@@ -53,7 +57,7 @@
       </VBox>
       <HBox alignment="CENTER_RIGHT">
          <children>
-            <Button id="login-button" mnemonicParsing="false" onAction="#login" text="ZALOGUJ" />
+            <Button id="login-button" mnemonicParsing="false" onAction="#login" text="%fxml.loginPanel.button" />
          </children>
       </HBox>
    </children>

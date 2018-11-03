@@ -9,17 +9,16 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import model.Customer;
+import modelFX.CustomerModel;
 import utils.DBManager;
-import utils.Dialogs;
+import utils.DialogsUtils;
+import utils.exception.ApplicationException;
 
-import javax.validation.Validator;
-import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import static controller.MainPanelController.MAIN_CONTROLLER;
-import static utils.ValidatorManager.isCorrectDataInRegistration;
+import static utils.ValidatorManager.validationOfRegistrationData;
 
 public class RegistrationPanelController implements Initializable {
 
@@ -62,15 +61,11 @@ public class RegistrationPanelController implements Initializable {
     @FXML
     private Button registrationButton;
 
-    private Validator validator;
+    private CustomerModel customerModel;
 
     @FXML
     void back(ActionEvent event) {
-        try {
-            MAIN_CONTROLLER.setCenter(WELCOME_PANEL_VIEW_FXML);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        MAIN_CONTROLLER.setCenter(WELCOME_PANEL_VIEW_FXML);
     }
 
     @FXML
@@ -82,43 +77,32 @@ public class RegistrationPanelController implements Initializable {
                 passwordField.getText()
         );
 
-        if (isCorrectDataInRegistration(this, customer)) {
-            return;
+        try {
+            if (validationOfRegistrationData(this, customer)) {
+                return;
+            }
+        } catch (ApplicationException e) {
+            e.printStackTrace();
         }
 
         CustomerDao customerDao = new CustomerDao(DBManager.getConnectionSource());
         try {
-            if (customerDao.isMail(emailField.getText())) {
-                Dialogs.errorAlert("Błąd formularza", "Istnieje już konto o podanym e-mailu.");
-                return;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+            customerDao.createOrUpdate(customer.encryptPassword());
+        } catch (ApplicationException e) {
+            DialogsUtils.errorAlert("Błąd!", e.getMessage());
         }
-        customerDao.createOrUpdate(customer.encryptPassword());
-        Dialogs.informationAlert("Rejestracja zakończona", "Twoja rejestracja przebiegła pomyślnie.");
-        try {
-            MAIN_CONTROLLER.setCenter(WELCOME_PANEL_VIEW_FXML);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        DialogsUtils.informationAlert("Rejestracja zakończona", "Twoja rejestracja przebiegła pomyślnie.");
+        MAIN_CONTROLLER.setCenter(WELCOME_PANEL_VIEW_FXML);
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        validator = getValidator();
-        firstNameField.textProperty().addListener(observable -> firstNameError.setText(""));
+        customerModel = new CustomerModel();
+        firstNameField.textProperty().addListener(observable -> firstNameError.setText(null));
         lastNameField.textProperty().addListener(observable -> lastNameError.setText(""));
         emailField.textProperty().addListener(observable -> emailError.setText(""));
         passwordField.textProperty().addListener(observable -> passwordError.setText(""));
         confirmPasswordField.textProperty().addListener(observable -> confirmPasswordError.setText(""));
-//        registrationButton.disableProperty().bind(
-//                firstNameField.textProperty().isEmpty()
-//                .or(lastNameField.textProperty().isEmpty())
-//                .or(emailField.textProperty().isEmpty())
-//                .or(passwordField.textProperty().isEmpty())
-//                .or(confirmPasswordField.textProperty().isEmpty())
-//        );
     }
 
     public TextField getFirstNameField() {
@@ -207,13 +191,5 @@ public class RegistrationPanelController implements Initializable {
 
     public void setRegistrationButton(Button registrationButton) {
         this.registrationButton = registrationButton;
-    }
-
-    public Validator getValidator() {
-        return validator;
-    }
-
-    public void setValidator(Validator validator) {
-        this.validator = validator;
     }
 }

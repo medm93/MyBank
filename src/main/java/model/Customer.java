@@ -3,7 +3,6 @@ package model;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 import org.apache.commons.codec.digest.DigestUtils;
-
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -11,9 +10,10 @@ import java.math.RoundingMode;
 @DatabaseTable(tableName = "customers")
 public class Customer implements BaseModel{
 
-    private static final String PASSWORD_PATTERN = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})";
+    private static final String PASSWORD_PATTERN = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$";
     private static final String FIRST_NAME_PATTERN = "^([a-zA-Z]{2,})";
     private static final String LAST_NAME_PATTERN = "^([a-zA-z]{1,}'?-?[a-zA-Z]{2,}\\s?([a-zA-Z]{1,})?)";
+
 
     @DatabaseField(columnName = "ID", generatedId = true)
     private int id;

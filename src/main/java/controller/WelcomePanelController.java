@@ -21,20 +21,12 @@ public class WelcomePanelController {
 
     @FXML
     void login(ActionEvent event) {
-        try {
-            MAIN_CONTROLLER.setCenter(LOGIN_PANEL_VIEW_FXML);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        MAIN_CONTROLLER.setCenter(LOGIN_PANEL_VIEW_FXML);
     }
 
     @FXML
     void registration(ActionEvent event) {
-        try {
-            MAIN_CONTROLLER.setCenter(REGISTRATION_PANEL_VIEW_FXML);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        MAIN_CONTROLLER.setCenter(REGISTRATION_PANEL_VIEW_FXML);
     }
 
 }

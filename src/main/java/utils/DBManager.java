@@ -19,7 +19,7 @@ public class DBManager {
     //only development
     public static void initializeDatabase() {
         createConnectionSource();
-        dropTable();
+        //dropTable();
         createTable();
         closeConnectionSource();
     }

@@ -36,14 +36,23 @@
                   <Label id="p" fx:id="login" text="login" />
                </children>
             </VBox>
-            <Button id="button-log-out" fx:id="logoutButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#logOut" prefHeight="30.0" prefWidth="100.0" text="Wyloguj" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0" />
+            <Button id="button-log-out" fx:id="logoutButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#logOut" prefHeight="40.0" prefWidth="100.0" text="Wyloguj" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0" />
+            <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="125.0" AnchorPane.topAnchor="10.0">
+               <graphic>
+                  <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/settings.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
          </children>
       </AnchorPane>
       <Separator prefWidth="200.0" />
       <HBox spacing="20.0">
          <children>
             <Label id="h2" text="STAN KONTA:" />
-            <Label id="h2-red" fx:id="accountBalance" text="0.0 PLN" />
+            <Label id="h2-red" fx:id="accountBalance" text="0.00 PLN" />
          </children>
       </HBox>
       <Separator prefWidth="200.0" />
