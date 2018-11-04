@@ -47,9 +47,10 @@
       <VBox spacing="5.0">
          <children>
             <Label id="form-title-label" text="%fxml.loginPanel.emailOrLogin.title" />
-            <TextField fx:id="emailOrLoginField" promptText="%fxml.loginPanel.emailOrLogin.promptText" />
+            <TextField fx:id="emailOrLogin" promptText="%fxml.loginPanel.emailOrLogin.promptText" />
             <Label id="form-title-label" text="%fxml.loginPanel.password.title" />
-            <PasswordField fx:id="passwordField" promptText="%fxml.loginPanel.password.promptText" />
+            <PasswordField fx:id="password" promptText="%fxml.loginPanel.password.promptText" />
+            <Label id="error-label" fx:id="error" wrapText="true" />
          </children>
          <VBox.margin>
             <Insets />

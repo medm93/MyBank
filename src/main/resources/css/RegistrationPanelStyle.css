@@ -46,10 +46,6 @@
     -fx-font-style: normal;
 }
 
-#error-text-field {
-    -fx-base: #f44336;
-}
-
 #error-label {
     -fx-text-fill: #f44336;
     -fx-font-size: 10px;

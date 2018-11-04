@@ -5,8 +5,10 @@ import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.logger.Logger;
 import com.j256.ormlite.logger.LoggerFactory;
 import com.j256.ormlite.stmt.QueryBuilder;
+import com.j256.ormlite.stmt.UpdateBuilder;
 import com.j256.ormlite.support.ConnectionSource;
 import model.BaseModel;
+import model.Customer;
 import utils.exception.ApplicationException;
 
 import java.sql.SQLException;
@@ -66,8 +68,13 @@ public abstract class CommonDao {
         }
     }
 
-    public <T extends BaseModel, I> QueryBuilder<T, I> getQueryBuilder(Class<T> tClass) {
-        Dao<T, I> dao = getDao(tClass);
+    public <T extends BaseModel, ID> QueryBuilder<T, ID> getQueryBuilder(Class<T> tClass) {
+        Dao<T, ID> dao = getDao(tClass);
         return dao.queryBuilder();
+    }
+
+    public <T extends BaseModel, ID> UpdateBuilder<T, ID> getUpdateBuilder(Class<T> tClass) {
+        Dao<T, ID> dao = getDao(tClass);
+        return dao.updateBuilder();
     }
 }

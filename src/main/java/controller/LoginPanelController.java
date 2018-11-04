@@ -1,92 +1,43 @@
 package controller;
 
-import dao.CustomerDao;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import model.Customer;
-import model.CustomerList;
-import org.apache.commons.codec.digest.DigestUtils;
-import utils.DBManager;
-import utils.DialogsUtils;
+import modelFX.CustomerFX;
+import modelFX.CustomerModel;
 
-import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import static controller.MainPanelController.MAIN_CONTROLLER;
-import static controller.CustomerPanelController.CUSTOMER_PANEL_CONTROLLER;
+
 
 public class LoginPanelController implements Initializable {
 
-    public static LoginPanelController LOGIN_CONTROLLER;
-
-    @FXML
-    private TextField loginTextField;
-
-    @FXML
-    private PasswordField passwordTextField;
-
-    @FXML
-    private Button signInButton;
-
-
-    private CustomerList customerList;
-    private MainPanelController mainPanelController;
-
-    public void initialize(URL location, ResourceBundle resources) {
-        LOGIN_CONTROLLER = this;
-    }
-
-    @FXML
-    void signIn(ActionEvent event) throws IOException {
-        if (loginTextField.getText().isEmpty() || passwordTextField.getText().isEmpty()) {
-            DialogsUtils.errorAlert( "Błąd formularza!", "Wszystkie pola muszą być uzupełnione.");
-            return;
-        }
-
-        if (customerList.getCustomerList().containsKey(loginTextField.getText())) {
-            if (customerList.getCustomerList().get(loginTextField.getText()).getPassword().equals(passwordTextField.getText())) {
-                MAIN_CONTROLLER.setSession(loginTextField.getText());
-                MAIN_CONTROLLER.setCenter("/fxml/CustomerPanelView.fxml");
-//                CUSTOMER_PANEL_CONTROLLER.logIn();
-            } else {
-                DialogsUtils.errorAlert( "Błąd formularza!", "Zły login lub hasło");
-            }
-        } else {
-            DialogsUtils.errorAlert("Błąd formularza!", "Zły login lub hasło");
-        }
-    }
-
-    public CustomerList getCustomerList() {
-        return customerList;
-    }
-
-    public void setCustomerList(CustomerList customerList) {
-        this.customerList = customerList;
-    }
-
-    public MainPanelController getMainPanelController() {
-        return mainPanelController;
-    }
-
-    public void setMainPanelController(MainPanelController mainPanelController) {
-        this.mainPanelController = mainPanelController;
-    }
-
-    ////////////////////////////////////////////////////
+    public static LoginPanelController LOGIN_PANEL_CONTROLLER;
     private static final String WELCOME_PANEL_VIEW_FXML = "/fxml/WelcomePanelView.fxml";
     private static final String CUSTOMER_PANEL_VIEW_FXML = "/fxml/CustomerPanelView.fxml";
 
     @FXML
-    private TextField emailOrLoginField;
+    private TextField emailOrLogin;
 
     @FXML
-    private PasswordField passwordField;
+    private PasswordField password;
+
+    @FXML
+    private Label error;
+
+    private CustomerModel customerModel;
+    private CustomerFX customerFX;
+
+    public void initialize(URL location, ResourceBundle resources) {
+        LOGIN_PANEL_CONTROLLER = this;
+        customerModel = new CustomerModel();
+    }
 
     @FXML
     void back(ActionEvent event) {
@@ -95,27 +46,49 @@ public class LoginPanelController implements Initializable {
 
     @FXML
     void login(ActionEvent event) {
-        CustomerDao customerDao = new CustomerDao(DBManager.getConnectionSource());
         try {
-            Customer customer = customerDao.findCustomer(
-                    emailOrLoginField.getText(),
-                    DigestUtils.sha512Hex(passwordField.getText())
-            );
-            if (customer != null) {
+            if (customerModel.findCustomerInDatabase(emailOrLogin.getText(), password.getText())) {
+                customerModel.initCustomer(emailOrLogin.getText(), password.getText());
                 MAIN_CONTROLLER.setCenter(CUSTOMER_PANEL_VIEW_FXML);
-                CUSTOMER_PANEL_CONTROLLER.setCustomer(customer);
-                CUSTOMER_PANEL_CONTROLLER.loadCustomerData();
-                System.out.println("zaloguj");
             } else {
-                System.out.println("error");
+                error.setText("Opss! Coś poszło nie tak");
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-//        try {
-//            System.out.println("ID: " + customerDao.find(emailOrLoginField.getText()));
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
+
+
+    }
+
+    public TextField getEmailOrLogin() {
+        return emailOrLogin;
+    }
+
+    public void setEmailOrLogin(TextField emailOrLogin) {
+        this.emailOrLogin = emailOrLogin;
+    }
+
+    public PasswordField getPassword() {
+        return password;
+    }
+
+    public void setPassword(PasswordField password) {
+        this.password = password;
+    }
+
+    public CustomerModel getCustomerModel() {
+        return customerModel;
+    }
+
+    public void setCustomerModel(CustomerModel customerModel) {
+        this.customerModel = customerModel;
+    }
+
+    public CustomerFX getCustomerFX() {
+        return customerFX;
+    }
+
+    public void setCustomerFX(CustomerFX customerFX) {
+        this.customerFX = customerFX;
     }
 }

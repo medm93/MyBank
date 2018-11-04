@@ -11,6 +11,7 @@ public class CustomerFX {
     private StringProperty firstName = new SimpleStringProperty();
     private StringProperty lastName = new SimpleStringProperty();
     private StringProperty email = new SimpleStringProperty();
+    private StringProperty login = new SimpleStringProperty();
     private StringProperty password = new SimpleStringProperty();
     private StringProperty accountBalance = new SimpleStringProperty();
 
@@ -62,6 +63,18 @@ public class CustomerFX {
         this.email.set(email);
     }
 
+    public String getLogin() {
+        return login.get();
+    }
+
+    public StringProperty loginProperty() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login.set(login);
+    }
+
     public String getPassword() {
         return password.get();
     }
@@ -84,5 +97,10 @@ public class CustomerFX {
 
     public void setAccountBalance(String accountBalance) {
         this.accountBalance.set(accountBalance);
+    }
+
+    @Override
+    public String toString() {
+        return firstName.getValue() + " " + lastName.getValue() + " accountBalance=" + accountBalance.getValue();
     }
 }

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox id="background" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="700.0" spacing="10.0" stylesheets="@../css/TransactionPanelStyle.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TransactionPanelController">
+   <children>
+      <VBox spacing="5.0">
+         <children>
+            <Label id="form-title-label" text="TYTUŁ" />
+            <VBox>
+               <children>
+                  <TextField fx:id="title" promptText="Tytuł" />
+                  <Label id="error-label" fx:id="titleError" maxWidth="1.7976931348623157E308" />
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+      <HBox alignment="BOTTOM_CENTER" spacing="100.0">
+         <children>
+            <HBox spacing="25.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <VBox>
+                     <children>
+                        <Label id="form-title-label" text="TYP" />
+                        <VBox>
+                           <children>
+                              <ComboBox fx:id="transactionType" prefWidth="150.0" />
+                              <Label id="error-label" fx:id="transactionTypeError" maxWidth="1.7976931348623157E308" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </VBox>
+                  <VBox>
+                     <children>
+                        <Label id="form-title-label" text="KWOTA" />
+                        <VBox>
+                           <children>
+                              <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                 <children>
+                                    <TextField fx:id="amount" promptText="0.00" />
+                                    <Label id="form-title-label" text="PLN" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <Label id="error-label" fx:id="amountError" maxWidth="1.7976931348623157E308" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <Button id="send-button" fx:id="send" mnemonicParsing="false" onAction="#send" text="WYŚLIJ" />
+         </children>
+      </HBox>
+   </children>
+   <padding>
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+   </padding>
+</VBox>

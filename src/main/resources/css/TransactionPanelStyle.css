@@ -6,24 +6,6 @@
     -fx-border-width: 2px;
 }
 
-#back-button {
-    -fx-base: #03A9F4;
-}
-
-#logo-label {
-    -fx-text-fill: #212121;
-    -fx-font-size: 15px;
-    -fx-font-weight: bold;
-    -fx-font-style: normal;
-}
-
-#title-label {
-    -fx-text-fill: #212121;
-    -fx-font-size: 25px;
-    -fx-font-weight: bold;
-    -fx-font-style: normal;
-}
-
 #form-title-label {
     -fx-text-fill: #212121;
     -fx-font-size: 12px;
@@ -31,17 +13,17 @@
     -fx-font-style: normal;
 }
 
-#login-button {
-    -fx-base: #8BC34A;
-    -fx-text-fill: #FAFAFA;
-    -fx-font-size: 14px;
+#error-label {
+    -fx-text-fill: #f44336;
+    -fx-font-size: 10px;
     -fx-font-weight: bold;
     -fx-font-style: normal;
 }
 
-#error-label {
-    -fx-text-fill: #f44336;
-    -fx-font-size: 10px;
+#send-button {
+    -fx-base: #8BC34A;
+    -fx-text-fill: #FAFAFA;
+    -fx-font-size: 14px;
     -fx-font-weight: bold;
     -fx-font-style: normal;
 }

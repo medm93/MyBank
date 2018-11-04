@@ -28,35 +28,13 @@ public class PaymentPanelController implements Initializable {
     @FXML
     private Button paymentButton;
 
-    private Map<String, Customer> customerList;
-    private String session;
-
     @FXML
-    void payment(ActionEvent event) throws IOException {
-        if (title.getText().isEmpty() || amountOfMoney.getText().isEmpty()) {
-            DialogsUtils.errorAlert("Błąd!", "Wszystkie pola muszą być uzupełnione.");
-            return;
-        }
-        if (amountOfMoney.getText().contains(".")) {
-            if (amountOfMoney.getText().substring(amountOfMoney.getText().indexOf(".")).length() > 3) {
-                DialogsUtils.errorAlert("Błąd!", "Nie właściwy format liczby.");
-                return;
-            }
-        }
-        try {
-            customerList.get(session).doPayment(title.getText(), amountOfMoney.getText());
-        } catch (NumberFormatException exception) {
-            DialogsUtils.errorAlert("Błąd!", "Kwota została odzielona: \",\" zamiast \".\".");
-        } finally {
-            MAIN_CONTROLLER.setCenter(USER_PANEL_VIEW);
-//            CUSTOMER_PANEL_CONTROLLER.logIn();
-        }
+    void payment(ActionEvent event) {
+
 
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        customerList = MAIN_CONTROLLER.getCustomerList().getCustomerList();
-        session = MAIN_CONTROLLER.getSession();
     }
 }

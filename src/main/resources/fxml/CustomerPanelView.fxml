@@ -2,72 +2,154 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.ToggleButton?>
-<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox id="background" alignment="TOP_CENTER" spacing="10.0" stylesheets="@../css/CustomerPanelStyle.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CustomerPanelController">
+<VBox id="background" alignment="TOP_CENTER" prefWidth="600.0" spacing="10.0" stylesheets="@../css/CustomerPanelStyle.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CustomerPanelController">
    <children>
-      <AnchorPane maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0">
+      <HBox>
          <children>
-            <Label id="logo" alignment="CENTER" contentDisplay="TOP" graphicTextGap="0.0" prefHeight="50.0" prefWidth="50.0" text="MyBank" textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
-               <graphic>
-                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/money-box.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <font>
-                  <Font name="System Bold Italic" size="12.0" />
-               </font>
-            </Label>
-            <Separator layoutX="47.0" layoutY="-75.0" orientation="VERTICAL" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="60.0" AnchorPane.topAnchor="5.0" />
-            <VBox spacing="5.0" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="0.0">
+            <HBox spacing="10.0" HBox.hgrow="ALWAYS">
                <children>
-                  <Label id="h1" fx:id="name" text="imie i nazwisko" />
-                  <Label id="p" fx:id="login" text="login" />
+                  <Label id="logo" alignment="CENTER" contentDisplay="TOP" graphicTextGap="0.0" prefHeight="50.0" prefWidth="50.0" text="MyBank" textAlignment="CENTER">
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/money-box.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font name="System Bold Italic" size="12.0" />
+                     </font>
+                  </Label>
+                  <Separator orientation="VERTICAL" />
+                  <VBox spacing="5.0">
+                     <children>
+                        <HBox spacing="5.0">
+                           <children>
+                              <Label id="h1" fx:id="firstName" text="imię" />
+                              <Label id="h1" fx:id="lastName" text="nazwisko" />
+                           </children>
+                        </HBox>
+                        <Label id="p" fx:id="login" text="login" />
+                     </children>
+                  </VBox>
                </children>
-            </VBox>
-            <Button id="button-log-out" fx:id="logoutButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#logOut" prefHeight="40.0" prefWidth="100.0" text="Wyloguj" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0" />
-            <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="125.0" AnchorPane.topAnchor="10.0">
-               <graphic>
-                  <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/settings.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
+            </HBox>
+            <HBox spacing="25.0">
+               <children>
+                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0">
+                     <graphic>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/settings.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button id="button-log-out" fx:id="logoutButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#logOut" prefHeight="40.0" prefWidth="100.0" text="Wyloguj" />
+               </children>
+            </HBox>
          </children>
-      </AnchorPane>
+      </HBox>
       <Separator prefWidth="200.0" />
       <HBox spacing="20.0">
          <children>
             <Label id="h2" text="STAN KONTA:" />
-            <Label id="h2-red" fx:id="accountBalance" text="0.00 PLN" />
+            <HBox spacing="5.0">
+               <children>
+                  <Label id="h2-red" fx:id="accountBalance" text="0.00" />
+                  <Label id="h2-red" text="PLN" />
+               </children>
+            </HBox>
          </children>
       </HBox>
       <Separator prefWidth="200.0" />
-      <HBox alignment="CENTER">
+      <HBox maxWidth="1.7976931348623157E308" spacing="50.0" VBox.vgrow="ALWAYS">
          <children>
-            <ToggleButton fx:id="paymentButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#paymentOnAction" prefHeight="50.0" prefWidth="150.0" text="Wpłać pieniądze">
-               <toggleGroup>
-                  <ToggleGroup fx:id="toggleGroup" />
-               </toggleGroup>
-            </ToggleButton>
-            <ToggleButton fx:id="withdrawalButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#withdrawalOnAction" prefHeight="50.0" prefWidth="150.0" text="Wypłać pieniądze" toggleGroup="$toggleGroup" />
-            <ToggleButton fx:id="historyButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#historyOnAction" prefHeight="50.0" prefWidth="150.0" text="Historia" toggleGroup="$toggleGroup" />
+            <VBox HBox.hgrow="ALWAYS">
+               <children>
+                  <Label text="TRANSAKCJA" VBox.vgrow="ALWAYS" />
+                  <VBox id="background" alignment="CENTER_LEFT" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="600.0" spacing="10.0" stylesheets="@../css/TransactionPanelStyle.css">
+                     <children>
+                        <VBox spacing="5.0">
+                           <children>
+                              <Label id="form-title-label" text="TYTUŁ" />
+                              <VBox>
+                                 <children>
+                                    <TextField fx:id="title" promptText="Tytuł" />
+                                    <Label id="error-label" fx:id="titleError" maxWidth="1.7976931348623157E308" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </VBox>
+                        <HBox alignment="BOTTOM_CENTER" spacing="100.0">
+                           <children>
+                              <HBox spacing="25.0" HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <VBox>
+                                       <children>
+                                          <Label id="form-title-label" text="TYP" />
+                                          <VBox>
+                                             <children>
+                                                <ComboBox fx:id="transactionType" prefWidth="150.0" />
+                                                <Label id="error-label" fx:id="transactionTypeError" maxWidth="1.7976931348623157E308" />
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </VBox>
+                                    <VBox>
+                                       <children>
+                                          <Label id="form-title-label" text="KWOTA" />
+                                          <VBox>
+                                             <children>
+                                                <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                                   <children>
+                                                      <TextField fx:id="amount" promptText="0.00" />
+                                                      <Label id="form-title-label" text="PLN" />
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                          </VBox>
+                                          <Label id="error-label" fx:id="amountError" maxWidth="1.7976931348623157E308" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                              <Button id="send-button" fx:id="send" mnemonicParsing="false" onAction="#send" text="WYŚLIJ" />
+                           </children>
+                        </HBox>
+                     </children>
+                     <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                     </padding>
+                  </VBox>
+               </children>
+            </VBox>
+            <VBox HBox.hgrow="ALWAYS">
+               <children>
+                  <Label text="HISTORIA" VBox.vgrow="ALWAYS" />
+                  <TableView fx:id="accountHistory" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="600.0" VBox.vgrow="ALWAYS">
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                  </TableView>
+               </children>
+            </VBox>
          </children>
+         <padding>
+            <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+         </padding>
       </HBox>
-      <VBox fx:id="vBox" alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
    </children>
    <padding>
       <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />

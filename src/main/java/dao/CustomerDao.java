@@ -1,11 +1,15 @@
 package dao;
 
+import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.GenericRawResults;
 import com.j256.ormlite.logger.Logger;
 import com.j256.ormlite.logger.LoggerFactory;
 import com.j256.ormlite.stmt.PreparedQuery;
+import com.j256.ormlite.stmt.PreparedUpdate;
 import com.j256.ormlite.stmt.QueryBuilder;
+import com.j256.ormlite.stmt.UpdateBuilder;
 import com.j256.ormlite.support.ConnectionSource;
+import model.BaseModel;
 import model.Customer;
 import utils.exception.ApplicationException;
 
@@ -56,14 +60,25 @@ public class CustomerDao extends CommonDao {
         }
     }
 
+    public Customer queryForCustomer(Customer customer) throws SQLException {
+        QueryBuilder<Customer, Integer> queryBuilder = getQueryBuilder(Customer.class);
+        queryBuilder.where().idEq(getDao(Customer.class), customer);
+        PreparedQuery<Customer> preparedQuery = queryBuilder.prepare();
+        return getDao(Customer.class).queryForFirst(preparedQuery);
+    }
+
     public Customer findCustomer(String emailOrLogin, String password) throws SQLException {
         QueryBuilder<Customer, Integer> queryBuilder = getQueryBuilder(Customer.class);
-//        queryBuilder.selectColumns("ID");
-//        queryBuilder.limit(1L);
         queryBuilder.where().eq("EMAIL", emailOrLogin).and().eq("PASSWORD", password);
         PreparedQuery<Customer> preparedQuery = queryBuilder.prepare();
-//        Customer customer = getDao(Customer.class).queryForFirst(preparedQuery);
-        Customer customer = getDao(Customer.class).queryForFirst(preparedQuery);
-        return customer;
+        return getDao(Customer.class).queryForFirst(preparedQuery);
+    }
+
+    public void updateAccountBalance(Customer customer, String newAccountBalance) throws SQLException {
+        UpdateBuilder<Customer, Integer> updateBuilder = getUpdateBuilder(Customer.class);
+        updateBuilder.updateColumnValue("ACCOUNT_BALANCE", newAccountBalance);
+        updateBuilder.where().eq("ID", customer.getId());
+        PreparedUpdate<Customer> preparedUpdate = updateBuilder.prepare();
+        getDao(Customer.class).update(preparedUpdate);
     }
 }
