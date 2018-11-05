@@ -8,6 +8,9 @@ import javafx.stage.StageStyle;
 import utils.DBManager;
 import utils.FXMLUtils;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+
 public class Main extends Application {
 
     private static final String MAIN_PANEL_VIEW_FXML = "/fxml/MainPanelView.fxml";

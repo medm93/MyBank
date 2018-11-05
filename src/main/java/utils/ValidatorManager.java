@@ -1,5 +1,6 @@
 package utils;
 
+import controller.CustomerPanelController;
 import controller.RegistrationPanelController;
 import controller.TransactionPanelController;
 import dao.CustomerDao;
@@ -25,41 +26,33 @@ public class ValidatorManager {
     private static final String TITLE = "title";
     private static final String TRANSACTION_TYPE = "transactionType";
     private static final String AMOUNT = "amount";
+    public static final String NUMBER_REGEX = "\\d+(\\.\\d+)?";
+    public static final String ZERO = "0";
 
     private static Validator getValidator() {
         ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
         return validatorFactory.getValidator();
     }
 
-    public static boolean validationOfTransactionData(TransactionPanelController transactionPanelController) {
+    public static boolean validationOfTransactionData(CustomerPanelController customerPanelController) {
         Transaction transaction = new Transaction(
-                transactionPanelController.getTitle().getText(),
-                transactionPanelController.getTransactionType().getValue(),
-                transactionPanelController.getAmount().getText()
+                customerPanelController.getTitle().getText(),
+                customerPanelController.getTransactionType().getValue(),
+                getAmount(customerPanelController.getAmount().getText())
         );
-        System.out.println(transaction);
         Set<ConstraintViolation<Transaction>> errors = getValidator().validate(transaction);
         if (!errors.isEmpty()) {
             errors.forEach(error -> {
                 switch (error.getPropertyPath().toString()) {
                     case TITLE: {
-                        transactionPanelController.getTitleError().setText(
-                                error.getMessage()
-//                                RESOURCE_BUNDLE.getString("validator.message.firstName")
-                        );
-                        break;
-                    }
-                    case TRANSACTION_TYPE: {
-                        transactionPanelController.getTransactionTypeError().setText(
-                                error.getMessage()
-//                                RESOURCE_BUNDLE.getString("validator.message.lastName")
+                        customerPanelController.getTitleError().setText(
+                                RESOURCE_BUNDLE.getString("validator.message.title")
                         );
                         break;
                     }
                     case AMOUNT: {
-                        transactionPanelController.getAmountError().setText(
-                                error.getMessage()
-//                                RESOURCE_BUNDLE.getString("validator.message.email")
+                        customerPanelController.getAmountError().setText(
+                                RESOURCE_BUNDLE.getString("validator.message.amount")
                         );
                         break;
                     }
@@ -67,7 +60,24 @@ public class ValidatorManager {
             });
             return true;
         }
+
         return false;
+    }
+
+    private static boolean amountIsNumeric(String amount) {
+        return amount.matches(NUMBER_REGEX);
+    }
+
+    private static boolean amountIsEmpty(String amount) {
+        return amount.isEmpty();
+    }
+
+    private static BigDecimal getAmount(String amount) {
+        if (amountIsEmpty(amount) || !amountIsNumeric(amount)) {
+            return new BigDecimal(ZERO);
+        } else {
+            return new BigDecimal(amount);
+        }
     }
 
     public static boolean validationOfRegistrationData(RegistrationPanelController registrationPanelController, Customer customer) throws ApplicationException {

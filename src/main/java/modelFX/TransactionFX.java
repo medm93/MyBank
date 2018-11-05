@@ -13,7 +13,7 @@ public class TransactionFX {
     private ObjectProperty<Date> date = new SimpleObjectProperty<>();
     private StringProperty title = new SimpleStringProperty();
     private ObjectProperty<TransactionType> transactionType = new SimpleObjectProperty<>();
-    private StringProperty amount = new SimpleStringProperty();
+    private ObjectProperty<BigDecimal> amount = new SimpleObjectProperty<>();
 
     public int getId() {
         return id.get();
@@ -75,15 +75,15 @@ public class TransactionFX {
         this.transactionType.set(transactionType);
     }
 
-    public String getAmount() {
+    public BigDecimal getAmount() {
         return amount.get();
     }
 
-    public StringProperty amountProperty() {
+    public ObjectProperty<BigDecimal> amountProperty() {
         return amount;
     }
 
-    public void setAmount(String amount) {
+    public void setAmount(BigDecimal amount) {
         this.amount.set(amount);
     }
 }

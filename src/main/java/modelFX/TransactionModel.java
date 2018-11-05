@@ -42,7 +42,7 @@ public class TransactionModel {
         transaction.setDate(new Date());
         transaction.setTitle(title);
         transaction.setTransactionType(transactionType);
-        transaction.setAmount(amount);
+        transaction.setAmount(new BigDecimal(amount));
         transactionDao.createOrUpdate(transaction);
         DBManager.closeConnectionSource();
         init(ConverterCustomer.convertToCustomerFX(customer));

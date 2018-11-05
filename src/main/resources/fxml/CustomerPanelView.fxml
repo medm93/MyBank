@@ -76,10 +76,10 @@
       <Separator prefWidth="200.0" />
       <HBox maxWidth="1.7976931348623157E308" spacing="50.0" VBox.vgrow="ALWAYS">
          <children>
-            <VBox HBox.hgrow="ALWAYS">
+            <VBox alignment="TOP_CENTER" spacing="25.0" stylesheets="@../css/TransactionPanelStyle.css" HBox.hgrow="ALWAYS">
                <children>
-                  <Label text="TRANSAKCJA" VBox.vgrow="ALWAYS" />
-                  <VBox id="background" alignment="CENTER_LEFT" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="600.0" spacing="10.0" stylesheets="@../css/TransactionPanelStyle.css">
+                  <Label id="title-label" text="TRANSAKCJA" VBox.vgrow="ALWAYS" />
+                  <VBox id="background" alignment="CENTER_LEFT" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="600.0" spacing="10.0">
                      <children>
                         <VBox spacing="5.0">
                            <children>
@@ -87,7 +87,7 @@
                               <VBox>
                                  <children>
                                     <TextField fx:id="title" promptText="Tytuł" />
-                                    <Label id="error-label" fx:id="titleError" maxWidth="1.7976931348623157E308" />
+                                    <Label id="error-label" fx:id="titleError" maxWidth="1.7976931348623157E308" wrapText="true" />
                                  </children>
                               </VBox>
                            </children>
@@ -120,7 +120,7 @@
                                                 </HBox>
                                              </children>
                                           </VBox>
-                                          <Label id="error-label" fx:id="amountError" maxWidth="1.7976931348623157E308" />
+                                          <Label id="error-label" fx:id="amountError" maxWidth="1.7976931348623157E308" wrapText="true" />
                                        </children>
                                     </VBox>
                                  </children>

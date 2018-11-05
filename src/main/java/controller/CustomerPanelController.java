@@ -9,6 +9,7 @@ import model.TransactionType;
 import modelFX.CustomerModel;
 import modelFX.TransactionFX;
 import modelFX.TransactionModel;
+import utils.ValidatorManager;
 import utils.converters.ConverterCustomer;
 import utils.exception.ApplicationException;
 
@@ -20,6 +21,14 @@ import java.util.ResourceBundle;
 import static controller.LoginPanelController.LOGIN_PANEL_CONTROLLER;
 
 public class CustomerPanelController implements Initializable {
+
+    private static final String PLUS = "+";
+    private static final String MINUS = "-";
+    private static final String DOT = ".";
+    private static final String COMMA = ",";
+    private static final String ONE_ZERO = "0";
+    private static final String TWO_ZEROS = "00";
+    private static final String DOT_AND_TWO_ZEROS = ".00";
 
     @FXML
     private Label firstName;
@@ -70,6 +79,7 @@ public class CustomerPanelController implements Initializable {
 
     @FXML
     void send(ActionEvent event) {
+        if (ValidatorManager.validationOfTransactionData(this)) return;
         switch (transactionType.getSelectionModel().getSelectedItem()) {
             case PAYMENT: {
                 customerModel.getCustomerFXObjectProperty().setAccountBalance(payment());
@@ -78,7 +88,7 @@ public class CustomerPanelController implements Initializable {
                             ConverterCustomer.convertToCustomer(customerModel.getCustomerFXObjectProperty()),
                             title.getText(),
                             transactionType.getSelectionModel().getSelectedItem(),
-                            amount.getText()
+                            amountFormat(PLUS, amount.getText())
                     );
                 } catch (ApplicationException e) {
                     e.printStackTrace();
@@ -92,7 +102,7 @@ public class CustomerPanelController implements Initializable {
                             ConverterCustomer.convertToCustomer(customerModel.getCustomerFXObjectProperty()),
                             title.getText(),
                             transactionType.getSelectionModel().getSelectedItem(),
-                            "-" + amount.getText()
+                            amountFormat(MINUS, amount.getText())
                     );
                 } catch (ApplicationException e) {
                     e.printStackTrace();
@@ -105,6 +115,35 @@ public class CustomerPanelController implements Initializable {
         } catch (ApplicationException | SQLException e) {
             e.printStackTrace();
         }
+//        title.setText(null);
+//        transactionType.getSelectionModel().select(TransactionType.PAYMENT);
+//        amount.setText(null);
+    }
+
+    private String amountFormat(String mathematicalSign, String amount) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(mathematicalSign);
+        if (!amount.contains(DOT)) {
+            stringBuilder.append(DOT_AND_TWO_ZEROS);
+        } else {
+            int length = amount.substring(amount.indexOf(DOT)).length();
+            switch (length) {
+                case 1: {
+                    stringBuilder.append(TWO_ZEROS);
+                    break;
+                }
+                case 2: {
+                    stringBuilder.append(ONE_ZERO);
+                    break;
+                }
+                default: {
+                    stringBuilder.append(amount);
+                }
+            }
+        }
+
+        return stringBuilder.toString();
+
     }
 
     private String payment() {
@@ -125,6 +164,8 @@ public class CustomerPanelController implements Initializable {
         initializeTransaction();
         initializeAccountHistory();
         accountHistory.setItems(transactionModel.getTransactions());
+        title.textProperty().addListener(observable -> titleError.setText(null));
+        amount.textProperty().addListener(observable -> amountError.setText(null));
     }
 
     private void initializeCustomer() {
@@ -136,6 +177,7 @@ public class CustomerPanelController implements Initializable {
 
     private void initializeTransaction() {
         transactionType.getItems().setAll(TransactionType.values());
+        transactionType.getSelectionModel().select(TransactionType.PAYMENT);
     }
 
     private void initializeAccountHistory() {

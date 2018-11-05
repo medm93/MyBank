@@ -3,6 +3,8 @@ package utils.converters;
 import model.Transaction;
 import modelFX.TransactionFX;
 
+import java.math.BigDecimal;
+
 public class ConverterTransaction {
 
     public static Transaction convertToTransaction(TransactionFX transactionFX) {

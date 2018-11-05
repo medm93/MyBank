@@ -32,15 +32,16 @@ public class Transaction implements BaseModel {
 
 //    @NotNull
 //    @Pattern(regexp = "^(\\d+(?:\\.\\d{2})?|\\\\.\\\\d+)&")
+
     @DecimalMin("0.01")
     @Digits(integer=100, fraction=2)
     @DatabaseField(columnName = "AMOUNT", canBeNull = false)
-    private String amount;
+    private BigDecimal amount;
 
     public Transaction() {
     }
 
-    public Transaction(String title, TransactionType transactionType, String amount) {
+    public Transaction(String title, TransactionType transactionType, BigDecimal amount) {
         this.title = title;
         this.transactionType = transactionType;
         this.amount = amount;
@@ -86,11 +87,11 @@ public class Transaction implements BaseModel {
         this.transactionType = transactionType;
     }
 
-    public String  getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
 
-    public void setAmount(String amount) {
+    public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
 
